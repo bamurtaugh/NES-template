@@ -1,4 +1,4 @@
-class Point3D {
+class Point {
     constructor(
         private readonly x: number,
         private readonly y: number
