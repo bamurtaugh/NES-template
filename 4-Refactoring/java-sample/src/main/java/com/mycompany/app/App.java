@@ -13,7 +13,7 @@ public class App {
 
         System.out.println("Hello Remote World!");
 
-        // Ask for the user's name
+        // Ask for the user's first name
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
 
