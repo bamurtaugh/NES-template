@@ -20,17 +20,6 @@ public class App {
         // Greet the user
         System.out.println("Hello, " + name + "! Welcome to the Remote World!");
 
-        // Ask for the user's age
-        System.out.print("Enter your age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        if (age < 18) {
-            System.out.println("You're quite young, " + name + "!");
-        } else {
-            System.out.println("Nice to meet you, " + name + "!");
-        }
-
         // Ask for the user's favorite programming language
         System.out.print("Enter your favorite programming language: ");
         String language = scanner.nextLine();
