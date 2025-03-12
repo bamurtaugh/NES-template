@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
-// List of possible words, each is 5 letters long
+// List of 5 possible words
 const WORDS = ['WORLD', 'QUICK', 'HAPPY', 'BRAIN', 'HOUSE'];
 let currentWord = WORDS[Math.floor(Math.random() * WORDS.length)];
 
