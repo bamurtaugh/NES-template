@@ -9,22 +9,7 @@ interface TaskFormProps {
   onCancel?: () => void;
 }
 
-// NES Demo: Try these edits to see Next Edit Suggestions in action:
-//
-// 1. Change the validateForm method to check for minimum description length:
-//    if (formData.description.trim().length < 10) {
-//      newErrors.description = 'Description must be at least 10 characters';
-//    }
-//    NES should identify that the existing condition also checks description and suggest 
-//    combining the two conditions into a more elegant solution
-//      
-//        VERIFIED, try this above line 65
-//
-// 2. Add a new showConfirmation parameter to the handleRemoveTag function:
-//    const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
-//    NES should suggest updating the onClick handler in the JSX and adding confirmation logic
-//
-//        VERIFIED, try this on line 103
+// NES Demo: Try edits from README Scenario 1 to see Next Edit Suggestions in action
 
 const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
   const { addTask, updateTask } = useTaskContext();

@@ -2,37 +2,6 @@
 
 This project serves as an advanced and relatable example of how Copilot Next Edit Suggestions (NES) can help with real-world development tasks. The application is a feature-rich task manager built with React and TypeScript.
 
-## Purpose
-
-This example demonstrates how Copilot Next Edit Suggestions can assist with:
-
-1. **Type Definitions and Interfaces**
-   - Adding new fields to existing types
-   - Modifying validation rules
-   - Creating derived types
-
-2. **State Management**
-   - Adding new methods to context providers
-   - Enhancing existing state management logic
-   - Implementing persistence strategies
-
-3. **Component Development**
-   - Adding new features to existing components
-   - Implementing different display modes
-   - Adding conditional rendering based on props/state
-   - Implementing accessibility improvements
-
-4. **Custom Hooks**
-   - Extracting complex logic into reusable hooks
-   - Adding new filtering options
-   - Implementing advanced search capabilities
-   - Optimizing performance with memoization
-
-5. **Form Handling**
-   - Adding validation rules
-   - Implementing dynamic form fields
-   - Adding complex state updates
-
 ## Project Structure
 
 ```
@@ -59,53 +28,44 @@ task-manager-app/
 
 ## How to Use This Example
 
-### Scenario 1: Adding New Fields to Task Interface
+### Scenario 1: `TaskForm.tsx`
 
-The `Task` interface in `types/task.ts` shows how NES can help when you need to add new fields to your data models. For example, adding an `assignedTo` field would require updates to:
-- The Task interface
-- The form component
-- The display component
-- The filtering logic
+1. Above line 50: Change the validateForm method to check for minimum description length:
 
-### Scenario 2: Enhancing Filtering Capabilities
-
-The `useTaskFilters.ts` custom hook demonstrates how NES can help with:
-- Adding new filter criteria
-- Implementing complex filtering logic
-- Optimizing performance for large data sets
-
-### Scenario 3: Adding Form Validation
-
-The `TaskForm.tsx` component shows how NES can help with:
-- Adding validation rules for form fields
-- Implementing error messages
-- Creating a better user experience
-
-### Scenario 4: Improving Component Display
-
-The `TaskItem.tsx` component demonstrates how NES can help with:
-- Adding different view modes
-- Implementing conditional rendering
-- Adding accessibility improvements
-
-## Getting Started
-
-1. Install dependencies:
    ```
-   npm install
+   if (formData.description.trim().length < 10) {
+      newErrors.description = 'Description must be at least 10 characters';
+   }
    ```
 
-2. Run the development server:
+   NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution
+
+2. On line 88: Add a new showConfirmation parameter to the handleRemoveTag function:
+
    ```
-   npm start
+   const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
    ```
 
-## NES Annotation Strategy
+   NES should suggest updating the onClick handler in the JSX and adding confirmation logic
 
-Throughout this codebase, you'll find comments explaining how NES can help with specific development tasks. These annotations highlight areas where Copilot Next Edit Suggestions would be most valuable, providing a guide for demonstrating NES capabilities in real-world scenarios.
+### Scenario 2: `task.ts`
 
-## Example NES Workflow
+1. Add a new field in the Task interface like 'isArchived: boolean;'
+   
+   NES should suggest adding it to the TaskFormData type as well
 
-1. **Start with:** "I need to add an assignee field to tasks"
-2. **NES will generate:** Updates to the Task interface, form fields, display components, and filtering logic
-3. **Result:** A complete implementation with all necessary changes across multiple files
+2. Create a TaskStatus type alias for the status field values:
+
+   ```   
+   type TaskStatus = 'todo' | 'in-progress' | 'completed';
+   ```
+
+   NES should suggest updating the status field in Task to use this type
+
+3. Add a TaskPriority enum above the Task interface:
+   
+   ```
+   enum TaskPriority { Low = 'low', Medium = 'medium', High = 'high' }
+   ```
+
+   NES should suggest updating the priority field to use this enum
