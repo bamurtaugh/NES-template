@@ -30,7 +30,15 @@ task-manager-app/
 
 ### Scenario 1: [`TaskForm.tsx`](/5-Fuller/task-manager-app/src/components/TaskForm.tsx)
 
-1. Above line 50: Change the validateForm method to check for minimum description length:
+1. On line 88: Add a new showConfirmation parameter to the handleRemoveTag function:
+
+   ```
+   const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
+   ```
+
+   NES should suggest updating the onClick handler in the JSX and adding confirmation logic.
+
+2. Above line 50: Change the validateForm method to check for minimum description length:
 
    ```
    if (formData.description.trim().length < 10) {
@@ -40,17 +48,9 @@ task-manager-app/
 
    NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution.
 
-2. On line 88: Add a new showConfirmation parameter to the handleRemoveTag function:
-
-   ```
-   const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
-   ```
-
-   NES should suggest updating the onClick handler in the JSX and adding confirmation logic.
-
 ### Scenario 2: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
 
-1. Add a new field in the Task interface like 'isArchived: boolean;'
+1. Line 13: Add a new field in the Task interface like `isArchived: boolean;`
    
    NES should suggest adding it to the TaskFormData type as well.
 
@@ -72,13 +72,9 @@ task-manager-app/
 
 ### Scenario 3: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
 
-1. Add a helper function around line 133 (inside the useMemo callback):
-
-   ```
-   const isOverdue = (task: Task) => task.dueDate && task.dueDate < new Date() && task.status !== 'completed';
-   ```
+1. Line 134: Update the `if` to a `switch`
    
-   NES should suggest how to use this function in the filtering logic.
+   NES should suggest how to use use `switch` syntax for the comparisons.
 
 ### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx)
 

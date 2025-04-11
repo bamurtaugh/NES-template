@@ -13,5 +13,3 @@ export interface Task {
 }
 
 export type TaskFormData = Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'showOverdueOnly'>;
-
-export type TaskStatus = 'todo' | 'in-progress' | 'completed';
