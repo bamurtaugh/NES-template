@@ -28,7 +28,7 @@ task-manager-app/
 
 ## How to Use This Example
 
-### Scenario 1: `TaskForm.tsx`
+### Scenario 1: [`TaskForm.tsx`](/5-Fuller/task-manager-app/src/components/TaskForm.tsx)
 
 1. Above line 50: Change the validateForm method to check for minimum description length:
 
@@ -48,7 +48,7 @@ task-manager-app/
 
    NES should suggest updating the onClick handler in the JSX and adding confirmation logic
 
-### Scenario 2: `task.ts`
+### Scenario 2: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
 
 1. Add a new field in the Task interface like 'isArchived: boolean;'
    
@@ -69,3 +69,21 @@ task-manager-app/
    ```
 
    NES should suggest updating the priority field to use this enum
+
+### Scenario 3: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
+
+1. Add a helper function around line 133 (inside the useMemo callback):
+
+   ```
+   const isOverdue = (task: Task) => task.dueDate && task.dueDate < new Date() && task.status !== 'completed';
+   ```
+   
+   NES should suggest how to use this function in the filtering logic
+
+2. Add a new option to TaskFilters interface:
+
+   ```
+   showOverdueOnly?: boolean;
+   ```
+
+   NES should suggest where to handle this property in the filtering section

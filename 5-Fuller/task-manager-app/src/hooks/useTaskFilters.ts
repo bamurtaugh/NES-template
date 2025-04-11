@@ -1,22 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Task } from '../types/task';
 
-// NES Demo: Try these edits to see Next Edit Suggestions in action:
-//
-// 1. Add a helper function at line 150 (inside the useMemo callback):
-//    const isOverdue = (task: Task) => task.dueDate && task.dueDate < new Date() && task.status !== 'completed';
-//    NES should suggest how to use this function in the filtering logic
-//
-// 2. Add a new option to TaskFilters interface:
-//    showOverdueOnly?: boolean;
-//    NES should suggest where to handle this property in the filtering section
-//
-// 3. Change part of the sort direction logic from:
-//    sortDirection: prev.sortDirection === 'asc' ? 'desc' : 'asc'
-//    to use a more explicit approach:
-//    sortDirection: prev.sortDirection === 'asc' ? 'desc' : 'asc' // Toggle direction
-//    NES might suggest adding similar clarifying comments elsewhere
-
 export interface TaskFilters {
   status: Task['status'] | 'all';
   priority: Task['priority'] | 'all';
