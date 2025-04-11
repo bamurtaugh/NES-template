@@ -3,13 +3,6 @@ import { Task } from '../types/task';
 import TaskItem from './TaskItem';
 import { useTaskContext } from '../context/TaskContext';
 
-// This component demonstrates how NES can help with:
-// 1. Implementing complex filtering and sorting logic
-// 2. Adding pagination or infinite scrolling
-// 3. Implementing drag and drop reordering
-// 4. Adding search functionality
-// 5. Adding batch operations (e.g., delete multiple tasks)
-
 const TaskList: React.FC = () => {
   const { tasks } = useTaskContext();
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
@@ -18,6 +11,16 @@ const TaskList: React.FC = () => {
   const [sortBy, setSortBy] = useState<'dueDate' | 'priority' | 'title'>('dueDate');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Demo 1: Uncomment these pagination variables to see NES suggest pagination UI and logic
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const itemsPerPage = 5;
+  
+  // Demo 2: Uncomment to see NES suggest batch selection UI and operations
+  // const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
+  
+  // Demo 3: Uncomment to see NES suggest grouping implementation
+  // const [groupByField, setGroupByField] = useState<'status' | 'priority' | null>(null);
 
   // Filter and sort tasks
   const filteredAndSortedTasks = useMemo(() => {

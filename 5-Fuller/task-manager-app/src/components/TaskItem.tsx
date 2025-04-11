@@ -6,14 +6,21 @@ import { useTaskContext } from '../context/TaskContext';
 interface TaskItemProps {
   task: Task;
   onEdit?: (task: Task) => void;
+  // Demo 1: Uncomment this line, and NES will suggest:
+  // - Adding a checkbox in the render method
+  // - Handling selection state changes
+  // - Making sure the prop is used correctly
+  // onSelect?: (taskId: string, isSelected: boolean) => void;
+  
+  // Demo 2: Uncomment this prop, and NES will suggest UI and logic changes:
+  // isCompactMode?: boolean;
 }
 
-// This component demonstrates how NES can help with:
-// 1. Adding new features to components (e.g., expand/collapse details)
-// 2. Implementing different display modes (e.g., compact view, grid view)
-// 3. Adding conditional rendering based on task properties
-// 4. Implementing animations or transitions
-// 5. Adding accessibility improvements
+// Demo scenarios for Next Edit Suggestions (NES):
+// 1. Uncomment the showDetails state variable below to see NES suggest
+//    expand/collapse UI and related handlers
+// 2. Add a new state for hover effects: const [isHovered, setIsHovered] = useState(false);
+//    and see NES suggest mouse event handlers and conditional styling
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit }) => {
   const { deleteTask, updateTask } = useTaskContext();

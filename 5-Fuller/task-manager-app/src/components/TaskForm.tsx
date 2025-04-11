@@ -9,12 +9,28 @@ interface TaskFormProps {
   onCancel?: () => void;
 }
 
-// This component demonstrates how NES can help with:
-// 1. Enhancing form validation
-// 2. Adding new form fields (e.g., assignedTo, attachments)
-// 3. Implementing complex form logic (e.g., dependent dropdowns)
-// 4. Improving accessibility features
-// 5. Adding UI enhancements based on state
+// Demo scenarios for Next Edit Suggestions (NES):
+// 1. Start implementing validation by uncommenting this constant:
+//    
+//    // const requiredFields = ['title', 'description'];
+//    
+//    NES will suggest:
+//    - A validateForm function
+//    - Form submission validation logic
+//    - Error display in the JSX
+//
+// 2. To demo dependent fields, uncomment these lines:
+//
+//    // const categories = ['Personal', 'Work', 'Study', 'Health'];
+//    // const subcategories = {
+//    //   Personal: ['Family', 'Hobby', 'Other'],
+//    //   Work: ['Meeting', 'Project', 'Admin'],
+//    //   Study: ['Research', 'Assignment', 'Exam'],
+//    //   Health: ['Exercise', 'Doctor', 'Nutrition']
+//    // };
+//    // const [category, setCategory] = useState('');
+//
+//    NES will suggest form fields and handlers for these
 
 const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
   const { addTask, updateTask } = useTaskContext();

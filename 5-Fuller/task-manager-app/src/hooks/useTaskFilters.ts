@@ -1,12 +1,16 @@
 import { useState, useMemo } from 'react';
 import { Task } from '../types/task';
 
-// This custom hook demonstrates how NES can help with:
-// 1. Extracting complex filtering logic into reusable hooks
-// 2. Adding new filter options (e.g., date ranges, assigned users)
-// 3. Implementing advanced search with fuzzy matching
-// 4. Optimizing performance with better memoization strategies
-// 5. Adding analytics or telemetry for filter usage
+// Demo scenarios for Copilot Next Edit Suggestions (NES):
+// 1. Start by adding an assignee field to the Task interface in task.ts
+//    - NES will suggest updating this TaskFilters interface to include assignee
+//    - Then suggest adding a new filter function for the assignee field
+// 2. Add a 'critical' level to the priority options in task.ts
+//    - NES will suggest updating the priority filter logic in the useMemo function
+// 3. Start implementing a separate sorting hook
+//    - NES will suggest which functions to move and what the interface should be
+// 4. Begin adding type for analytics tracking 
+//    - NES will suggest where to add tracking logic in each filter setter function
 
 export interface TaskFilters {
   status: Task['status'] | 'all';
@@ -15,6 +19,8 @@ export interface TaskFilters {
   tag?: string;
   dueDateStart?: Date | null;
   dueDateEnd?: Date | null;
+  // Uncomment to see NES suggest changes throughout the file:
+  // assignee?: string | null;
 }
 
 export interface SortOptions {
