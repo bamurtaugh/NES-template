@@ -4,13 +4,6 @@ import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import { Task } from '../types/task';
 
-// This App component demonstrates how NES can help with:
-// 1. Adding new app-level features (e.g., themes, user preferences)
-// 2. Implementing responsive layouts
-// 3. Adding routing and navigation
-// 4. Implementing app-wide notifications
-// 5. Adding keyboard shortcuts and accessibility features
-
 const App: React.FC = () => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);

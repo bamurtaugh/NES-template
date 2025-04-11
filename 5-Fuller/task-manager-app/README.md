@@ -38,7 +38,7 @@ task-manager-app/
    }
    ```
 
-   NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution
+   NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution.
 
 2. On line 88: Add a new showConfirmation parameter to the handleRemoveTag function:
 
@@ -46,13 +46,13 @@ task-manager-app/
    const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
    ```
 
-   NES should suggest updating the onClick handler in the JSX and adding confirmation logic
+   NES should suggest updating the onClick handler in the JSX and adding confirmation logic.
 
 ### Scenario 2: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
 
 1. Add a new field in the Task interface like 'isArchived: boolean;'
    
-   NES should suggest adding it to the TaskFormData type as well
+   NES should suggest adding it to the TaskFormData type as well.
 
 2. Create a TaskStatus type alias for the status field values:
 
@@ -60,7 +60,7 @@ task-manager-app/
    type TaskStatus = 'todo' | 'in-progress' | 'completed';
    ```
 
-   NES should suggest updating the status field in Task to use this type
+   NES should suggest updating the status field in Task to use this type.
 
 3. Add a TaskPriority enum above the Task interface:
    
@@ -68,7 +68,7 @@ task-manager-app/
    enum TaskPriority { Low = 'low', Medium = 'medium', High = 'high' }
    ```
 
-   NES should suggest updating the priority field to use this enum
+   NES should suggest updating the priority field to use this enum.
 
 ### Scenario 3: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
 
@@ -78,13 +78,15 @@ task-manager-app/
    const isOverdue = (task: Task) => task.dueDate && task.dueDate < new Date() && task.status !== 'completed';
    ```
    
-   NES should suggest how to use this function in the filtering logic
+   NES should suggest how to use this function in the filtering logic.
 
 ### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx)
 
 1. Line 25: Add an `enum taskPriority` 
 
-   NES should suggest updates to the priority comparison logic to use the enum (i.e. `TaskPriority.HIGH` instead of `high`)
+   NES should suggest updates to the priority comparison logic to use the enum (i.e. `TaskPriority.HIGH` instead of `high`). 
+   
+   It should also suggest to create an enum for `taskStatus` and then use it in the status comparison logic.
 
 2. Switch statement starting line 39: Modify the task status rendering to use emojis and friendlier language.
 
@@ -99,37 +101,3 @@ task-manager-app/
    ```
 
    NES should suggest similar updates throughout the rest of the switch statement.
-
-### Scenario 5: [`TaskList.tsx`](/5-Fuller/task-manager-app/src/components/TaskList.tsx)
-
-1. Refactor the filter handlers to use a unified approach:
-   Change setFilterStatus to: 
-   const handleFilterChange = (filterType: 'status' | 'priority', value: string) => {
-     if (filterType === 'status') {
-       setFilterStatus(value as Task['status'] | 'all');
-     } else if (filterType === 'priority') {
-       setFilterPriority(value as Task['priority'] | 'all');
-     }
-   };
-   NES should suggest updating all the filter handlers in the JSX to use this new function
-
-2. Change the sorting comparison logic in filteredAndSortedTasks to use
-   named helper functions:
-   const getComparisonValue = (task: Task) => {
-     switch(sortBy) {
-       case 'dueDate': return task.dueDate?.getTime() || Number.MAX_VALUE;
-       case 'priority': return getPriorityValue(task.priority);
-       case 'title': return task.title;
-       default: return 0;
-     }
-   };
-   NES should suggest updating the comparison functions to use this helper
-
-3. Modify the map function for rendering tasks to include conditional rendering:
-   {filteredAndSortedTasks.map((task, index) => (
-     <React.Fragment key={task.id}>
-       {index > 0 && index % 5 === 0 && <div className="section-divider"></div>}
-       <TaskItem task={task} onEdit={handleEditTask} />
-     </React.Fragment>
-   ))}
-   NES should suggest similar pattern changes elsewhere in the component
