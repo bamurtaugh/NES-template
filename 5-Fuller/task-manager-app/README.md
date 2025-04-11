@@ -99,3 +99,37 @@ task-manager-app/
    ```
 
    NES should suggest similar updates throughout the rest of the switch statement.
+
+### Scenario 5: [`TaskList.tsx`](/5-Fuller/task-manager-app/src/components/TaskList.tsx)
+
+1. Refactor the filter handlers to use a unified approach:
+   Change setFilterStatus to: 
+   const handleFilterChange = (filterType: 'status' | 'priority', value: string) => {
+     if (filterType === 'status') {
+       setFilterStatus(value as Task['status'] | 'all');
+     } else if (filterType === 'priority') {
+       setFilterPriority(value as Task['priority'] | 'all');
+     }
+   };
+   NES should suggest updating all the filter handlers in the JSX to use this new function
+
+2. Change the sorting comparison logic in filteredAndSortedTasks to use
+   named helper functions:
+   const getComparisonValue = (task: Task) => {
+     switch(sortBy) {
+       case 'dueDate': return task.dueDate?.getTime() || Number.MAX_VALUE;
+       case 'priority': return getPriorityValue(task.priority);
+       case 'title': return task.title;
+       default: return 0;
+     }
+   };
+   NES should suggest updating the comparison functions to use this helper
+
+3. Modify the map function for rendering tasks to include conditional rendering:
+   {filteredAndSortedTasks.map((task, index) => (
+     <React.Fragment key={task.id}>
+       {index > 0 && index % 5 === 0 && <div className="section-divider"></div>}
+       <TaskItem task={task} onEdit={handleEditTask} />
+     </React.Fragment>
+   ))}
+   NES should suggest similar pattern changes elsewhere in the component

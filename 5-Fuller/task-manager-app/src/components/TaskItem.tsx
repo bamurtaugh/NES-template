@@ -1,3 +1,5 @@
+// NES Demo: Try edits from README Scenario 4 to see Next Edit Suggestions in action
+
 import React, { useState } from 'react';
 import { Task } from '../types/task';
 import { format } from 'date-fns';
