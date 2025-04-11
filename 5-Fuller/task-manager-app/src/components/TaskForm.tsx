@@ -1,0 +1,243 @@
+import React, { useState, useEffect } from 'react';
+import { Task, TaskFormData } from '../types/task';
+import { useTaskContext } from '../context/TaskContext';
+import { format } from 'date-fns';
+
+interface TaskFormProps {
+  task?: Task;
+  onSubmit?: (task: Task) => void;
+  onCancel?: () => void;
+}
+
+// This component demonstrates how NES can help with:
+// 1. Enhancing form validation
+// 2. Adding new form fields (e.g., assignedTo, attachments)
+// 3. Implementing complex form logic (e.g., dependent dropdowns)
+// 4. Improving accessibility features
+// 5. Adding UI enhancements based on state
+
+const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
+  const { addTask, updateTask } = useTaskContext();
+  const [errors, setErrors] = useState<Partial<Record<keyof TaskFormData, string>>>({});
+  
+  const [formData, setFormData] = useState<TaskFormData>({
+    title: '',
+    description: '',
+    priority: 'medium',
+    status: 'todo',
+    dueDate: null,
+    tags: []
+  });
+
+  const [tagInput, setTagInput] = useState('');
+
+  // Initialize form with task data if provided
+  useEffect(() => {
+    if (task) {
+      setFormData({
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        status: task.status,
+        dueDate: task.dueDate,
+        tags: [...task.tags]
+      });
+    }
+  }, [task]);
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<Record<keyof TaskFormData, string>> = {};
+    
+    if (!formData.title.trim()) {
+      newErrors.title = 'Title is required';
+    }
+    
+    if (formData.description.trim().length > 500) {
+      newErrors.description = 'Description must be less than 500 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      dueDate: value ? new Date(value) : null
+    }));
+  };
+
+  const handleTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTagInput(e.target.value);
+  };
+
+  const handleAddTag = () => {
+    if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
+      setFormData(prev => ({
+        ...prev,
+        tags: [...prev.tags, tagInput.trim()]
+      }));
+      setTagInput('');
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setFormData(prev => ({
+      ...prev,
+      tags: prev.tags.filter(tag => tag !== tagToRemove)
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    let result: Task;
+    
+    if (task) {
+      // Update existing task
+      const updated = updateTask(task.id, formData);
+      if (!updated) return;
+      result = updated;
+    } else {
+      // Create new task
+      result = addTask(formData);
+    }
+    
+    if (onSubmit) {
+      onSubmit(result);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="task-form">
+      <div className="form-group">
+        <label htmlFor="title">Task Title*</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          className={errors.title ? 'error' : ''}
+        />
+        {errors.title && <p className="error-message">{errors.title}</p>}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          className={errors.description ? 'error' : ''}
+          rows={4}
+        />
+        {errors.description && <p className="error-message">{errors.description}</p>}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="priority">Priority</label>
+        <select
+          id="priority"
+          name="priority"
+          value={formData.priority}
+          onChange={handleChange}
+        >
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="status">Status</label>
+        <select
+          id="status"
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+        >
+          <option value="todo">To Do</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="dueDate">Due Date</label>
+        <input
+          type="date"
+          id="dueDate"
+          name="dueDate"
+          value={formData.dueDate ? format(formData.dueDate, 'yyyy-MM-dd') : ''}
+          onChange={handleDateChange}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="tagInput">Tags</label>
+        <div className="tag-input-container">
+          <input
+            type="text"
+            id="tagInput"
+            value={tagInput}
+            onChange={handleTagInputChange}
+            placeholder="Add tag and press Enter"
+          />
+          <button 
+            type="button" 
+            onClick={handleAddTag}
+            className="tag-add-btn"
+          >
+            Add
+          </button>
+        </div>
+        <div className="tags-container">
+          {formData.tags.map(tag => (
+            <span key={tag} className="tag">
+              {tag}
+              <button 
+                type="button" 
+                onClick={() => handleRemoveTag(tag)}
+                className="tag-remove-btn"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="form-actions">
+        <button type="submit" className="btn-primary">
+          {task ? 'Update Task' : 'Create Task'}
+        </button>
+        {onCancel && (
+          <button 
+            type="button" 
+            onClick={onCancel}
+            className="btn-secondary"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+    </form>
+  );
+};
+
+export default TaskForm;
