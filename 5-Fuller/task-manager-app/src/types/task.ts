@@ -8,22 +8,19 @@ export interface Task {
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
-  // Demo scenario 1: Uncomment this line to see NES suggest updates in:
-  // - TaskFilters interface
-  // - Filter setter function
-  // - Filter logic in useMemo
-  // - resetFilters function
-  // assignedTo?: string;
-  
-  // Demo scenario 2: Change priority to: 'low' | 'medium' | 'high' | 'critical'
-  // See NES suggest updates to the priority sorting logic in useTaskFilters.ts
 }
 
 export type TaskFormData = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;
 
-// Demo scenario 3: Start typing "export type TaskSummary" below
-// and see NES suggest the complete definition based on Task
-
-// Demo scenario 4: Add a function parameter with completedAt field
-// e.g., function markTaskComplete(task: Task): Task & { completedAt: Date } {
-//       See NES suggest the function implementation and related changes
+// NES Demo: Try these edits in this file to see Next Edit Suggestions in action:
+//
+// 1. Change the 'status' type from 'todo' | 'in-progress' | 'completed' 
+//    to 'todo' | 'in-progress' | 'blocked' | 'completed'
+//    NES should suggest updating related code in this file
+//
+// 2. Rename the 'priority' field to 'priorityLevel' 
+//    NES should identify all usages that need to be updated
+//
+// 3. Add a completedAt field to the Task interface:
+//    completedAt: Date | null;
+//    NES should suggest adding it to TaskFormData and other related spots

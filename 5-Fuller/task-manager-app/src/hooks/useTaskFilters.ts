@@ -1,16 +1,16 @@
 import { useState, useMemo } from 'react';
 import { Task } from '../types/task';
 
-// Demo scenarios for Copilot Next Edit Suggestions (NES):
-// 1. Start by adding an assignee field to the Task interface in task.ts
-//    - NES will suggest updating this TaskFilters interface to include assignee
-//    - Then suggest adding a new filter function for the assignee field
-// 2. Add a 'critical' level to the priority options in task.ts
-//    - NES will suggest updating the priority filter logic in the useMemo function
-// 3. Start implementing a separate sorting hook
-//    - NES will suggest which functions to move and what the interface should be
-// 4. Begin adding type for analytics tracking 
-//    - NES will suggest where to add tracking logic in each filter setter function
+// NES Demo: Try these edits to see Next Edit Suggestions in action:
+//
+// 1. Rename one of the filter setter functions (e.g., change setStatusFilter to updateStatusFilter)
+//    NES should identify the function usage in this file and suggest updating the return object
+//
+// 2. Change the SortOptions 'sortBy' property to add a new option (e.g., 'status')
+//    NES should suggest updating the switch statement in the sorting logic below
+//
+// 3. In the resetFilters function, change one property's default value
+//    NES should suggest updating the initial state where it's defined
 
 export interface TaskFilters {
   status: Task['status'] | 'all';

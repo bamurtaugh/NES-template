@@ -9,21 +9,16 @@ interface TaskFormProps {
   onCancel?: () => void;
 }
 
-// Demo scenarios for Next Edit Suggestions (NES):
-// 1. Start implementing validation by uncommenting this constant:
-//    
-//    // const requiredFields = ['title', 'description'];
-//    
-//    NES will suggest:
-//    - A validateForm function
-//    - Form submission validation logic
-//    - Error display in the JSX
+// NES Demo: Try these edits to see Next Edit Suggestions in action:
 //
-// 2. To demo dependent fields, uncomment these lines:
+// 1. Rename the errors state variable to formErrors
+//    NES should identify all usages of the variable and suggest updates
 //
-//    // const categories = ['Personal', 'Work', 'Study', 'Health'];
-//    // const subcategories = {
-//    //   Personal: ['Family', 'Hobby', 'Other'],
+// 2. Change the name of the handleSubmit function to submitForm
+//    NES should suggest updating the form's onSubmit handler in the JSX
+//
+// 3. Edit the initialFormData object structure by renaming a property
+//    NES should suggest updates to all form field references
 //    //   Work: ['Meeting', 'Project', 'Admin'],
 //    //   Study: ['Research', 'Assignment', 'Exam'],
 //    //   Health: ['Exercise', 'Doctor', 'Nutrition']

@@ -6,21 +6,18 @@ import { useTaskContext } from '../context/TaskContext';
 interface TaskItemProps {
   task: Task;
   onEdit?: (task: Task) => void;
-  // Demo 1: Uncomment this line, and NES will suggest:
-  // - Adding a checkbox in the render method
-  // - Handling selection state changes
-  // - Making sure the prop is used correctly
-  // onSelect?: (taskId: string, isSelected: boolean) => void;
-  
-  // Demo 2: Uncomment this prop, and NES will suggest UI and logic changes:
-  // isCompactMode?: boolean;
 }
 
-// Demo scenarios for Next Edit Suggestions (NES):
-// 1. Uncomment the showDetails state variable below to see NES suggest
-//    expand/collapse UI and related handlers
-// 2. Add a new state for hover effects: const [isHovered, setIsHovered] = useState(false);
-//    and see NES suggest mouse event handlers and conditional styling
+// NES Demo: Try these edits to see Next Edit Suggestions in action:
+//
+// 1. Change the deleteTask function name to removeTask in the destructure statement
+//    NES should identify the handleDelete function using it and suggest updates
+//
+// 2. Edit the getPriorityClass function name to getTaskPriorityClass
+//    NES should identify all places where this function is called in the JSX 
+//
+// 3. Update a className in the JSX elements (e.g., change task-title to task-heading)
+//    NES should find all occurrences of this class in the file
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit }) => {
   const { deleteTask, updateTask } = useTaskContext();

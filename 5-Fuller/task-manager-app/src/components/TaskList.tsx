@@ -3,6 +3,18 @@ import { Task } from '../types/task';
 import TaskItem from './TaskItem';
 import { useTaskContext } from '../context/TaskContext';
 
+// NES Demo: Try these edits to see Next Edit Suggestions in action:
+//
+// 1. Change one of the filter handler function names (e.g., setFilterStatus to updateFilterStatus)
+//    NES should identify where this function is used in the JSX and suggest updates
+//
+// 2. Modify the sort options type in handleSortChange from 'dueDate' | 'priority' | 'title'
+//    to include a new option like 'createdAt'
+//    NES should suggest updating the sort button JSX and the switch statement in the sorting logic
+//
+// 3. Rename a CSS class in the JSX (e.g., change "task-filters" to "filter-controls")
+//    NES should identify all related CSS class references in this file
+
 const TaskList: React.FC = () => {
   const { tasks } = useTaskContext();
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
