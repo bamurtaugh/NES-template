@@ -80,10 +80,22 @@ task-manager-app/
    
    NES should suggest how to use this function in the filtering logic
 
-2. Add a new option to TaskFilters interface:
+### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx)
 
+1. Line 25: Add an `enum taskPriority` 
+
+   NES should suggest updates to the priority comparison logic to use the enum (i.e. `TaskPriority.HIGH` instead of `high`)
+
+2. Switch statement starting line 39: Modify the task status rendering to use emojis and friendlier language.
+
+   Change from:
    ```
-   showOverdueOnly?: boolean;
+   return 'status-completed';
    ```
 
-   NES should suggest where to handle this property in the filtering section
+   to:
+   ```
+   return 'Task completed! ✅';
+   ```
+
+   NES should suggest similar updates throughout the rest of the switch statement.
