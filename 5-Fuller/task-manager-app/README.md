@@ -54,7 +54,7 @@ task-manager-app/
    
    NES should suggest adding it to the TaskFormData type as well.
 
-2. Create a TaskStatus type alias for the status field values:
+2. End of file: Create a TaskStatus type alias for the status field values:
 
    ```   
    type TaskStatus = 'todo' | 'in-progress' | 'completed';
@@ -62,7 +62,7 @@ task-manager-app/
 
    NES should suggest updating the status field in Task to use this type.
 
-3. Add a TaskPriority enum above the Task interface:
+3. Top of file: Add a TaskPriority enum above the Task interface:
    
    ```
    enum TaskPriority { Low = 'low', Medium = 'medium', High = 'high' }
