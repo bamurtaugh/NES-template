@@ -30,7 +30,7 @@ task-manager-app/
 
 ### Scenario 1: [`TaskForm.tsx`](/5-Fuller/task-manager-app/src/components/TaskForm.tsx)
 
-1. On line 88: Add a new showConfirmation parameter to the handleRemoveTag function:
+1. Line 88: Add a new `showConfirmation` parameter to the `handleRemoveTag` function:
 
    ```
    const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
@@ -50,7 +50,7 @@ task-manager-app/
 
 ### Scenario 2: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
 
-1. Line 134: Update the `if` to a `switch`
+1. Line 134: Update the `if` to a `switch`.
    
    NES should suggest how to use use `switch` syntax for the comparisons.
 
