@@ -17,15 +17,14 @@ interface TaskFormProps {
 //    }
 //    NES should identify that the existing condition also checks description and suggest 
 //    combining the two conditions into a more elegant solution
+//      
+//        VERIFIED, try this above line 65
 //
 // 2. Add a new showConfirmation parameter to the handleRemoveTag function:
 //    const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
 //    NES should suggest updating the onClick handler in the JSX and adding confirmation logic
 //
-// 3. Change the form submission button's conditional text from:
-//    {task ? 'Update Task' : 'Create Task'} to something with more conditions like:
-//    {task ? 'Update' : formData.priority === 'high' ? 'Create Urgent Task' : 'Create Task'}
-//    NES should suggest similar conditional logic in other parts of the component
+//        VERIFIED, try this on line 103
 
 const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
   const { addTask, updateTask } = useTaskContext();
