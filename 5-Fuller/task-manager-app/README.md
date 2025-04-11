@@ -48,7 +48,13 @@ task-manager-app/
 
    NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution.
 
-### Scenario 2: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
+### Scenario 2: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
+
+1. Line 134: Update the `if` to a `switch`
+   
+   NES should suggest how to use use `switch` syntax for the comparisons.
+
+### Scenario 3: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
 
 1. Line 13: Add a new field in the Task interface like `isArchived: boolean;`
    
@@ -69,12 +75,6 @@ task-manager-app/
    ```
 
    NES should suggest updating the priority field to use this enum.
-
-### Scenario 3: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
-
-1. Line 134: Update the `if` to a `switch`
-   
-   NES should suggest how to use use `switch` syntax for the comparisons.
 
 ### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx)
 
