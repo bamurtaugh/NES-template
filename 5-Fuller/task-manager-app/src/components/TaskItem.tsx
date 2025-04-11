@@ -8,29 +8,6 @@ interface TaskItemProps {
   onEdit?: (task: Task) => void;
 }
 
-// NES Demo: Try these edits to see Next Edit Suggestions in action:
-//
-// 1. Change the getPriorityClass function to handle an additional priority level:
-//    if (task.priority === 'critical') return 'priority-critical';
-//    NES should suggest updates to the priority comparison logic elsewhere in the file
-//
-// 2. Modify the task status rendering to use a switch statement instead of if/else:
-//    switch(task.status) {
-//      case 'todo': return '📋 To Do';
-//      case 'in-progress': return '⏳ In Progress';
-//      case 'completed': return '✅ Completed';
-//      default: return task.status;
-//    }
-//    NES should suggest updating similar conditionals in the component with this pattern
-//
-// 3. Add error handling to date formatting:
-//    try {
-//      return task.dueDate ? format(task.dueDate, 'MMM d, yyyy') : 'No due date';
-//    } catch (error) {
-//      return 'Invalid date';
-//    }
-//    NES should suggest adding similar error handling to other date operations
-
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit }) => {
   const { deleteTask, updateTask } = useTaskContext();
   const [showDetails, setShowDetails] = useState(false);
