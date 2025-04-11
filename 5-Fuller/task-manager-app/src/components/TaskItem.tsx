@@ -10,14 +10,26 @@ interface TaskItemProps {
 
 // NES Demo: Try these edits to see Next Edit Suggestions in action:
 //
-// 1. Change the deleteTask function name to removeTask in the destructure statement
-//    NES should identify the handleDelete function using it and suggest updates
+// 1. Change the getPriorityClass function to handle an additional priority level:
+//    if (task.priority === 'critical') return 'priority-critical';
+//    NES should suggest updates to the priority comparison logic elsewhere in the file
 //
-// 2. Edit the getPriorityClass function name to getTaskPriorityClass
-//    NES should identify all places where this function is called in the JSX 
+// 2. Modify the task status rendering to use a switch statement instead of if/else:
+//    switch(task.status) {
+//      case 'todo': return '📋 To Do';
+//      case 'in-progress': return '⏳ In Progress';
+//      case 'completed': return '✅ Completed';
+//      default: return task.status;
+//    }
+//    NES should suggest updating similar conditionals in the component with this pattern
 //
-// 3. Update a className in the JSX elements (e.g., change task-title to task-heading)
-//    NES should find all occurrences of this class in the file
+// 3. Add error handling to date formatting:
+//    try {
+//      return task.dueDate ? format(task.dueDate, 'MMM d, yyyy') : 'No due date';
+//    } catch (error) {
+//      return 'Invalid date';
+//    }
+//    NES should suggest adding similar error handling to other date operations
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit }) => {
   const { deleteTask, updateTask } = useTaskContext();

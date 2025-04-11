@@ -14,13 +14,13 @@ export type TaskFormData = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;
 
 // NES Demo: Try these edits in this file to see Next Edit Suggestions in action:
 //
-// 1. Change the 'status' type from 'todo' | 'in-progress' | 'completed' 
-//    to 'todo' | 'in-progress' | 'blocked' | 'completed'
-//    NES should suggest updating related code in this file
+// 1. Add a new field in the Task interface like 'isArchived: boolean;'
+//    NES should suggest adding it to the TaskFormData type as well
 //
-// 2. Rename the 'priority' field to 'priorityLevel' 
-//    NES should identify all usages that need to be updated
+// 2. Create a TaskStatus type alias for the status field values:
+//    type TaskStatus = 'todo' | 'in-progress' | 'completed';
+//    NES should suggest updating the status field in Task to use this type
 //
-// 3. Add a completedAt field to the Task interface:
-//    completedAt: Date | null;
-//    NES should suggest adding it to TaskFormData and other related spots
+// 3. Add a TaskPriority enum above the Task interface:
+//    enum TaskPriority { Low = 'low', Medium = 'medium', High = 'high' }
+//    NES should suggest updating the priority field to use this enum

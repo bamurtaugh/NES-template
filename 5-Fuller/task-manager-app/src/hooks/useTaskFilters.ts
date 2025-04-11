@@ -3,14 +3,23 @@ import { Task } from '../types/task';
 
 // NES Demo: Try these edits to see Next Edit Suggestions in action:
 //
-// 1. Rename one of the filter setter functions (e.g., change setStatusFilter to updateStatusFilter)
-//    NES should identify the function usage in this file and suggest updating the return object
+// 1. Modify the filter logic in filteredAndSortedTasks to use a reducer pattern:
+//    let result = tasks.reduce((filtered, task) => {
+//      if (status !== 'all' && task.status !== status) return filtered;
+//      return [...filtered, task];
+//    }, [] as Task[]);
+//    NES should suggest converting other filters to use this pattern for consistency
 //
-// 2. Change the SortOptions 'sortBy' property to add a new option (e.g., 'status')
-//    NES should suggest updating the switch statement in the sorting logic below
+// 2. Add performance optimization to a filter with a guard clause:
+//    // Skip expensive search if no search term
+//    if (!searchTerm.trim()) {
+//      return result;
+//    }
+//    NES should suggest similar optimization techniques for other filters
 //
-// 3. In the resetFilters function, change one property's default value
-//    NES should suggest updating the initial state where it's defined
+// 3. Change the sorting logic to extract sort comparators into separate functions:
+//    const compareByDueDate = (a: Task, b: Task) => { /* comparison logic */ }
+//    NES should suggest extracting other sort comparisons into similar functions
 
 export interface TaskFilters {
   status: Task['status'] | 'all';

@@ -5,15 +5,37 @@ import { useTaskContext } from '../context/TaskContext';
 
 // NES Demo: Try these edits to see Next Edit Suggestions in action:
 //
-// 1. Change one of the filter handler function names (e.g., setFilterStatus to updateFilterStatus)
-//    NES should identify where this function is used in the JSX and suggest updates
+// 1. Refactor the filter handlers to use a unified approach:
+//    Change setFilterStatus to: 
+//    const handleFilterChange = (filterType: 'status' | 'priority', value: string) => {
+//      if (filterType === 'status') {
+//        setFilterStatus(value as Task['status'] | 'all');
+//      } else if (filterType === 'priority') {
+//        setFilterPriority(value as Task['priority'] | 'all');
+//      }
+//    };
+//    NES should suggest updating all the filter handlers in the JSX to use this new function
 //
-// 2. Modify the sort options type in handleSortChange from 'dueDate' | 'priority' | 'title'
-//    to include a new option like 'createdAt'
-//    NES should suggest updating the sort button JSX and the switch statement in the sorting logic
+// 2. Change the sorting comparison logic in filteredAndSortedTasks to use
+//    named helper functions:
+//    const getComparisonValue = (task: Task) => {
+//      switch(sortBy) {
+//        case 'dueDate': return task.dueDate?.getTime() || Number.MAX_VALUE;
+//        case 'priority': return getPriorityValue(task.priority);
+//        case 'title': return task.title;
+//        default: return 0;
+//      }
+//    };
+//    NES should suggest updating the comparison functions to use this helper
 //
-// 3. Rename a CSS class in the JSX (e.g., change "task-filters" to "filter-controls")
-//    NES should identify all related CSS class references in this file
+// 3. Modify the map function for rendering tasks to include conditional rendering:
+//    {filteredAndSortedTasks.map((task, index) => (
+//      <React.Fragment key={task.id}>
+//        {index > 0 && index % 5 === 0 && <div className="section-divider"></div>}
+//        <TaskItem task={task} onEdit={handleEditTask} />
+//      </React.Fragment>
+//    ))}
+//    NES should suggest similar pattern changes elsewhere in the component
 
 const TaskList: React.FC = () => {
   const { tasks } = useTaskContext();

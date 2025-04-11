@@ -11,21 +11,21 @@ interface TaskFormProps {
 
 // NES Demo: Try these edits to see Next Edit Suggestions in action:
 //
-// 1. Rename the errors state variable to formErrors
-//    NES should identify all usages of the variable and suggest updates
+// 1. Change the validateForm method to check for minimum description length:
+//    if (formData.description.trim().length < 10) {
+//      newErrors.description = 'Description must be at least 10 characters';
+//    }
+//    NES should identify that the existing condition also checks description and suggest 
+//    combining the two conditions into a more elegant solution
 //
-// 2. Change the name of the handleSubmit function to submitForm
-//    NES should suggest updating the form's onSubmit handler in the JSX
+// 2. Add a new showConfirmation parameter to the handleRemoveTag function:
+//    const handleRemoveTag = (tagToRemove: string, showConfirmation: boolean = false) => {
+//    NES should suggest updating the onClick handler in the JSX and adding confirmation logic
 //
-// 3. Edit the initialFormData object structure by renaming a property
-//    NES should suggest updates to all form field references
-//    //   Work: ['Meeting', 'Project', 'Admin'],
-//    //   Study: ['Research', 'Assignment', 'Exam'],
-//    //   Health: ['Exercise', 'Doctor', 'Nutrition']
-//    // };
-//    // const [category, setCategory] = useState('');
-//
-//    NES will suggest form fields and handlers for these
+// 3. Change the form submission button's conditional text from:
+//    {task ? 'Update Task' : 'Create Task'} to something with more conditions like:
+//    {task ? 'Update' : formData.priority === 'high' ? 'Create Urgent Task' : 'Create Task'}
+//    NES should suggest similar conditional logic in other parts of the component
 
 const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
   const { addTask, updateTask } = useTaskContext();
