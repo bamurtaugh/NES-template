@@ -1,6 +1,6 @@
 # Programming Lessons Notebook
 
-This folder contains a comprehensive Jupyter notebook that compiles the main programming lessons and concepts demonstrated across all the example projects in the NES (Next Edit Suggestions) template repository.
+This repository contains a comprehensive Jupyter notebook that compiles the main programming lessons and concepts demonstrated across all the example projects in the NES (Next Edit Suggestions) template repository.
 
 ## What's Included
 
@@ -45,10 +45,7 @@ pip install jupyter
 
 ### Running the Notebook
 ```bash
-# Navigate to this directory
-cd 7-Lessons-Notebook
-
-# Start Jupyter
+# Start Jupyter in the repository root
 jupyter notebook programming-lessons.ipynb
 ```
 
