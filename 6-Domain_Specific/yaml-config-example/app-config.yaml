@@ -1,0 +1,59 @@
+# Application Configuration Example
+# This YAML file demonstrates various configuration patterns where NES can provide intelligent suggestions
+
+app:
+  name: "my-application"
+  version: "1.0.0"
+  debug: false
+  
+# Database configuration
+database:
+  host: "localhost"
+  port: 5432
+  name: "myapp_db"
+  username: "admin"
+  password: "password123"
+  pool:
+    min_connections: 5
+    max_connections: 20
+    timeout: 30
+
+# Server configuration  
+server:
+  host: "0.0.0.0"
+  port: 8080
+  ssl:
+    enabled: false
+    cert_path: ""
+    key_path: ""
+
+# Logging configuration
+logging:
+  level: "info"
+  format: "json"
+  outputs:
+    - type: "console"
+    - type: "file"
+      path: "/var/log/app.log"
+      max_size: "100MB"
+      max_files: 5
+
+# Feature flags
+features:
+  new_ui: true
+  analytics: false
+  beta_features: false
+
+# External services
+services:
+  redis:
+    host: "localhost"
+    port: 6379
+    password: ""
+  
+  email:
+    provider: "smtp"
+    host: "smtp.gmail.com"
+    port: 587
+    username: "noreply@example.com"
+    password: "email_password"
