@@ -1,0 +1,183 @@
+# NES Demo: Docker Compose Configuration - Service Orchestration
+# Try making the following edits to see Next Edit Suggestions in action:
+
+version: '3.8'
+
+services:
+  # Database service
+  database:
+    image: postgres:14-alpine
+    container_name: task_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: taskmanager
+      POSTGRES_USER: taskuser
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - task_network
+    
+    # NES Scenario 1: Add health check
+    # When you add healthcheck configuration,
+    # NES should suggest appropriate check intervals
+    # and dependency management for other services
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskuser -d taskmanager"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Redis cache service
+  redis:
+    image: redis:7-alpine
+    container_name: task_cache
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - task_network
+    
+    # NES Scenario 2: Add Redis configuration
+    # When you add custom redis.conf,
+    # NES should suggest memory management settings
+    # and persistence configurations
+
+  # Backend API service
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production
+    container_name: task_api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://taskuser:${DB_PASSWORD}@database:5432/taskmanager
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - task_network
+    volumes:
+      - ./logs:/app/logs
+    
+    # NES Scenario 3: Add resource limits
+    # When you add deploy.resources,
+    # NES should suggest appropriate memory and CPU limits
+    # based on the service type and dependencies
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://localhost:3000
+    container_name: task_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api
+    networks:
+      - task_network
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/ssl:ro
+    
+    # NES Scenario 4: Add nginx configuration
+    # When you modify nginx.conf volume mount,
+    # NES should suggest adding SSL certificates
+    # and proper proxy configuration
+
+  # Monitoring service
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: task_monitoring
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    networks:
+      - task_network
+
+  # NES Scenario 5: Add logging service
+  # When you add a logging service like ELK or Loki,
+  # NES should suggest configuring log drivers
+  # and updating other services to use centralized logging
+  
+  # Log aggregation (example)
+  # loki:
+  #   image: grafana/loki:latest
+  #   container_name: task_loki
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3100:3100"
+  #   volumes:
+  #     - ./loki-config.yml:/etc/loki/local-config.yaml
+  #   networks:
+  #     - task_network
+
+# Network configuration
+networks:
+  task_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+    
+    # NES Scenario 6: Add network security
+    # When you add network policies or custom subnets,
+    # NES should suggest security best practices
+    # and service isolation strategies
+
+# Volume configuration
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  
+  # NES Scenario 7: Add backup volumes
+  # When you add backup or shared volumes,
+  # NES should suggest appropriate drivers
+  # and backup strategies
+
+# NES Scenario 8: Add development override
+# When you create docker-compose.override.yml,
+# NES should suggest development-specific configurations
+# like volume mounts, debug ports, and environment variables

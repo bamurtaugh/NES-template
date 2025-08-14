@@ -1,0 +1,118 @@
+# NES Demo: YAML Configuration - Structure Normalization and Validation
+# Try making the following edits to see Next Edit Suggestions in action:
+
+# Application Configuration
+app:
+  name: "task-manager-api"
+  version: "1.0.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 3000
+
+# NES Scenario 1: Add environment-specific configuration
+# When you add a new environment section, NES should suggest
+# maintaining consistent structure across environments
+environment:
+  development:
+    debug: true
+    log_level: "debug"
+    database_url: "sqlite:///dev.db"
+  
+  production:
+    debug: false
+    log_level: "info"
+    # NES Scenario 2: Add database configuration
+    # When you add database_url here, NES should suggest
+    # using environment variables for sensitive data
+    database_url: "${DATABASE_URL}"
+
+# Security Configuration
+security:
+  jwt:
+    secret: "${JWT_SECRET}"
+    expiration: 3600
+    algorithm: "HS256"
+  
+  # NES Scenario 3: Add CORS configuration
+  # When you add cors settings, NES should suggest
+  # security best practices and common CORS patterns
+  cors:
+    origins: ["http://localhost:3000"]
+    methods: ["GET", "POST", "PUT", "DELETE"]
+    headers: ["Content-Type", "Authorization"]
+
+# Database Configuration
+database:
+  pool_size: 10
+  max_overflow: 20
+  pool_timeout: 30
+  pool_recycle: 3600
+  
+  # NES Scenario 4: Add migration configuration
+  # When you add migrations section, NES should suggest
+  # consistent naming and path conventions
+  migrations:
+    directory: "migrations"
+    auto_upgrade: false
+
+# Logging Configuration
+logging:
+  version: 1
+  disable_existing_loggers: false
+  
+  formatters:
+    standard:
+      format: '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+    detailed:
+      format: '%(asctime)s [%(levelname)s] %(name)s:%(lineno)d: %(message)s'
+  
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: standard
+      stream: ext://sys.stdout
+    
+    # NES Scenario 5: Add file logging handler
+    # When you add file handler, NES should suggest
+    # rotation policies and consistent configuration
+    file:
+      class: logging.handlers.RotatingFileHandler
+      level: INFO
+      formatter: detailed
+      filename: logs/app.log
+      maxBytes: 10485760  # 10MB
+      backupCount: 5
+
+  loggers:
+    app:
+      level: DEBUG
+      handlers: [console, file]
+      propagate: false
+    
+    # NES Scenario 6: Add database logger
+    # When you add sqlalchemy logger, NES should suggest
+    # appropriate log levels and handler configuration
+    sqlalchemy.engine:
+      level: INFO
+      handlers: [console]
+      propagate: false
+
+  root:
+    level: INFO
+    handlers: [console]
+
+# Cache Configuration
+cache:
+  type: "redis"
+  host: "${REDIS_HOST:-localhost}"
+  port: 6379
+  db: 0
+  password: "${REDIS_PASSWORD:-}"
+  
+  # NES Scenario 7: Add cache policies
+  # When you add expiration policies, NES should suggest
+  # consistent naming and appropriate timeout values
+  policies:
+    default_ttl: 3600
+    max_connections: 100

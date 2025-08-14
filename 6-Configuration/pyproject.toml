@@ -1,0 +1,55 @@
+# NES Demo: TOML Configuration - Structure Normalization and Key Renaming
+# Try making the following edits to see Next Edit Suggestions in action:
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-python-project"
+version = "0.1.0"
+description = "A sample Python project for NES configuration demos"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+keywords = ["sample", "demo", "nes"]
+
+# NES Scenario 1: Add a new author entry
+# When you add: {name = "Jane Doe", email = "jane@example.com"}
+# NES should suggest formatting consistency and adding it to the authors array
+
+dependencies = [
+    "requests>=2.25.0",
+    "click>=7.0"
+]
+
+# NES Scenario 2: Rename 'optional-dependencies' to follow Python conventions
+# When you change this key name, NES should suggest updating related references
+[project.optional-dependencies]
+test = ["pytest>=6.0", "pytest-cov"]
+dev = ["black", "flake8", "mypy"]
+
+# NES Scenario 3: Add new tool configuration section
+# When you add [tool.black], NES should suggest common black configurations
+# and maintain consistency with existing tool sections below
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["myproject*"]
+
+# NES Scenario 4: Modernize configuration syntax
+# When you update this to use newer TOML syntax,
+# NES should suggest updating other similar sections for consistency
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=myproject"
+
+# NES Scenario 5: Add security-related configuration
+# When you add tool.bandit configuration, NES should suggest
+# security best practices and integration with existing test tools

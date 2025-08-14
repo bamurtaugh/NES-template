@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/task-schema.json",
+  "title": "Task Configuration Schema",
+  "description": "JSON Schema for task management configuration with NES demonstrations",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the configuration"
+    },
+    "environment": {
+      "type": "string",
+      "enum": ["development", "staging", "production"],
+      "description": "Application environment"
+    },
+    "database": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["sqlite", "postgresql", "mysql"]
+        },
+        "host": {
+          "type": "string",
+          "format": "hostname"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "credentials": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "required": ["username", "password"]
+        }
+      },
+      "required": ["type", "name"],
+      "additionalProperties": false
+    },
+    "api": {
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 30000,
+          "description": "Request timeout in milliseconds"
+        },
+        "retries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "rateLimit": {
+          "type": "object",
+          "properties": {
+            "requests": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "windowMs": {
+              "type": "integer",
+              "minimum": 1000
+            }
+          },
+          "required": ["requests", "windowMs"]
+        }
+      },
+      "required": ["baseUrl"]
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "enableNotifications": {
+          "type": "boolean",
+          "default": true
+        },
+        "enableAnalytics": {
+          "type": "boolean",
+          "default": false
+        },
+        "maxTasksPerUser": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 100
+        }
+      }
+    }
+  },
+  "required": ["version", "environment", "database"],
+  "additionalProperties": false,
+  
+  "examples": [
+    {
+      "version": "1.0.0",
+      "environment": "development",
+      "database": {
+        "type": "sqlite",
+        "name": "dev.db"
+      },
+      "api": {
+        "baseUrl": "http://localhost:3000",
+        "timeout": 5000,
+        "retries": 3
+      },
+      "features": {
+        "enableNotifications": true,
+        "enableAnalytics": false,
+        "maxTasksPerUser": 50
+      }
+    }
+  ]
+}
