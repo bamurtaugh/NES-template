@@ -1,0 +1,16 @@
+{
+  "name": "config-tests",
+  "version": "1.0.0",
+  "description": "Test suite for configuration files in 6-Configuration directory",
+  "main": "test_configs.js",
+  "scripts": {
+    "test": "node test_configs.js",
+    "validate": "node validate_json.js"
+  },
+  "keywords": ["configuration", "testing", "nes", "validation"],
+  "author": "GitHub Copilot",
+  "license": "MIT",
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
