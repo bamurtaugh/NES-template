@@ -7,7 +7,7 @@ import { useTaskContext } from '../context/TaskContext';
 
 const TaskList: React.FC = () => {
   const { tasks } = useTaskContext();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  // const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [filterStatus, setFilterStatus] = useState<Task['status'] | 'all'>('all');
   const [filterPriority, setFilterPriority] = useState<Task['priority'] | 'all'>('all');
   const [sortBy, setSortBy] = useState<'dueDate' | 'priority' | 'title'>('dueDate');
@@ -92,7 +92,7 @@ const TaskList: React.FC = () => {
 
   // Handler for editing task
   const handleEditTask = (task: Task) => {
-    setSelectedTask(task);
+    // setSelectedTask(task);
     // In a real app, you'd open a modal or navigate to edit page
     console.log('Edit task:', task);
   };
