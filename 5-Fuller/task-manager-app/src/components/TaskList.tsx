@@ -99,15 +99,23 @@ const TaskList: React.FC = () => {
 
   return (
     <div className="task-list-container">
-      <div className="task-filters">
+      <div className="task-filters" role="search" aria-labelledby="filters-heading">
+        <h2 id="filters-heading" className="sr-only">Filter and Search Tasks</h2>
+        
         <div className="search-container">
+          <label htmlFor="search-input" className="sr-only">Search tasks</label>
           <input
+            id="search-input"
             type="text"
             placeholder="Search tasks..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
+            aria-describedby="search-help"
           />
+          <div id="search-help" className="sr-only">
+            Search by task title, description, or tags
+          </div>
         </div>
         
         <div className="filter-controls">
@@ -140,45 +148,55 @@ const TaskList: React.FC = () => {
           </div>
         </div>
         
-        <div className="sort-controls">
+        <div className="sort-controls" role="group" aria-labelledby="sort-heading">
+          <h3 id="sort-heading" className="sr-only">Sort Options</h3>
           <span>Sort by: </span>
           <button 
             onClick={() => handleSortChange('dueDate')}
             className={`sort-btn ${sortBy === 'dueDate' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'dueDate'}
+            aria-label={`Sort by due date ${sortBy === 'dueDate' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : ''}`}
           >
             Due Date {sortBy === 'dueDate' && (sortDirection === 'asc' ? '↑' : '↓')}
           </button>
           <button 
             onClick={() => handleSortChange('priority')}
             className={`sort-btn ${sortBy === 'priority' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'priority'}
+            aria-label={`Sort by priority ${sortBy === 'priority' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : ''}`}
           >
             Priority {sortBy === 'priority' && (sortDirection === 'asc' ? '↑' : '↓')}
           </button>
           <button 
             onClick={() => handleSortChange('title')}
             className={`sort-btn ${sortBy === 'title' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'title'}
+            aria-label={`Sort by title ${sortBy === 'title' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : ''}`}
           >
             Title {sortBy === 'title' && (sortDirection === 'asc' ? '↑' : '↓')}
           </button>
         </div>
       </div>
 
-      <div className="task-count">
+      <div className="task-count" role="status" aria-live="polite">
         <span>{filteredAndSortedTasks.length} tasks</span>
       </div>
 
       {filteredAndSortedTasks.length > 0 ? (
-        <div className="tasks-grid">
-          {filteredAndSortedTasks.map(task => (
-            <TaskItem 
-              key={task.id} 
-              task={task} 
-              onEdit={handleEditTask}
-            />
-          ))}
-        </div>
+        <section aria-labelledby="task-list-heading">
+          <h2 id="task-list-heading" className="sr-only">Task List</h2>
+          <div className="tasks-grid" role="list">
+            {filteredAndSortedTasks.map(task => (
+              <TaskItem 
+                key={task.id} 
+                task={task} 
+                onEdit={handleEditTask}
+              />
+            ))}
+          </div>
+        </section>
       ) : (
-        <div className="no-tasks-message">
+        <div className="no-tasks-message" role="status">
           <p>No tasks found matching your filters</p>
         </div>
       )}
