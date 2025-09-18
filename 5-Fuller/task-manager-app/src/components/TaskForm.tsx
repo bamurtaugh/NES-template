@@ -127,8 +127,11 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
           value={formData.title}
           onChange={handleChange}
           className={errors.title ? 'error' : ''}
+          aria-invalid={errors.title ? 'true' : 'false'}
+          aria-describedby={errors.title ? 'title-error' : undefined}
+          required
         />
-        {errors.title && <p className="error-message">{errors.title}</p>}
+        {errors.title && <p id="title-error" className="error-message" role="alert">{errors.title}</p>}
       </div>
 
       <div className="form-group">
@@ -140,8 +143,10 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
           onChange={handleChange}
           className={errors.description ? 'error' : ''}
           rows={4}
+          aria-invalid={errors.description ? 'true' : 'false'}
+          aria-describedby={errors.description ? 'description-error' : undefined}
         />
-        {errors.description && <p className="error-message">{errors.description}</p>}
+        {errors.description && <p id="description-error" className="error-message" role="alert">{errors.description}</p>}
       </div>
 
       <div className="form-group">
@@ -192,23 +197,29 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
             value={tagInput}
             onChange={handleTagInputChange}
             placeholder="Add tag and press Enter"
+            aria-describedby="tag-instructions"
           />
           <button 
             type="button" 
             onClick={handleAddTag}
             className="tag-add-btn"
+            aria-label="Add tag"
           >
             Add
           </button>
         </div>
-        <div className="tags-container">
+        <div id="tag-instructions" className="sr-only">
+          Type a tag name and click Add button to add it to the task
+        </div>
+        <div className="tags-container" role="list" aria-label="Current tags">
           {formData.tags.map(tag => (
-            <span key={tag} className="tag">
+            <span key={tag} className="tag" role="listitem">
               {tag}
               <button 
                 type="button" 
                 onClick={() => handleRemoveTag(tag)}
                 className="tag-remove-btn"
+                aria-label={`Remove tag ${tag}`}
               >
                 ×
               </button>
