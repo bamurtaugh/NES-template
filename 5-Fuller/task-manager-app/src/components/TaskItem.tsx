@@ -58,43 +58,52 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit }) => {
     <div className={`task-item ${getStatusClass()}`}>
       <div className="task-header">
         <div className="task-title-container">
-          <span className={`priority-indicator ${getPriorityClass()}`}></span>
+          <span 
+            className={`priority-indicator ${getPriorityClass()}`}
+            aria-label={`Priority: ${task.priority}`}
+            role="img"
+          ></span>
           <h3 className="task-title">{task.title}</h3>
         </div>
         <div className="task-actions">
           <button 
             className="btn-icon"
             onClick={() => setShowDetails(!showDetails)}
-            aria-label={showDetails ? "Hide details" : "Show details"}
+            aria-label={showDetails ? "Hide task details" : "Show task details"}
+            aria-expanded={showDetails}
           >
-            {showDetails ? '▼' : '►'}
+            <span aria-hidden="true">{showDetails ? '▼' : '►'}</span>
           </button>
           {onEdit && (
             <button 
               className="btn-icon"
               onClick={() => onEdit(task)}
-              aria-label="Edit task"
+              aria-label={`Edit task: ${task.title}`}
             >
-              ✏️
+              <span aria-hidden="true">✏️</span>
+              <span className="sr-only">Edit</span>
             </button>
           )}
           <button 
             className="btn-icon delete"
             onClick={handleDelete}
-            aria-label="Delete task"
+            aria-label={`Delete task: ${task.title}`}
           >
-            🗑️
+            <span aria-hidden="true">🗑️</span>
+            <span className="sr-only">Delete</span>
           </button>
         </div>
       </div>
 
       <div className="task-brief">
         <div className="task-status">
-          <span>Status: </span>
+          <label htmlFor={`status-${task.id}`}>Status: </label>
           <select
+            id={`status-${task.id}`}
             value={task.status}
             onChange={(e) => handleStatusUpdate(e.target.value as Task['status'])}
             className={getStatusClass()}
+            aria-label={`Change status for task: ${task.title}`}
           >
             <option value="todo">To Do</option>
             <option value="in-progress">In Progress</option>

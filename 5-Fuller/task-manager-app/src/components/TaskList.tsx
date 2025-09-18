@@ -7,7 +7,6 @@ import { useTaskContext } from '../context/TaskContext';
 
 const TaskList: React.FC = () => {
   const { tasks } = useTaskContext();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [filterStatus, setFilterStatus] = useState<Task['status'] | 'all'>('all');
   const [filterPriority, setFilterPriority] = useState<Task['priority'] | 'all'>('all');
   const [sortBy, setSortBy] = useState<'dueDate' | 'priority' | 'title'>('dueDate');
@@ -92,7 +91,6 @@ const TaskList: React.FC = () => {
 
   // Handler for editing task
   const handleEditTask = (task: Task) => {
-    setSelectedTask(task);
     // In a real app, you'd open a modal or navigate to edit page
     console.log('Edit task:', task);
   };
@@ -101,12 +99,15 @@ const TaskList: React.FC = () => {
     <div className="task-list-container">
       <div className="task-filters">
         <div className="search-container">
+          <label htmlFor="task-search" className="sr-only">Search tasks</label>
           <input
+            id="task-search"
             type="text"
             placeholder="Search tasks..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
+            aria-label="Search tasks by title, description, or tags"
           />
         </div>
         
@@ -140,35 +141,53 @@ const TaskList: React.FC = () => {
           </div>
         </div>
         
-        <div className="sort-controls">
-          <span>Sort by: </span>
+        <div className="sort-controls" role="group" aria-label="Sort tasks">
+          <span id="sort-label">Sort by: </span>
           <button 
             onClick={() => handleSortChange('dueDate')}
             className={`sort-btn ${sortBy === 'dueDate' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'dueDate'}
+            aria-describedby="sort-label"
           >
-            Due Date {sortBy === 'dueDate' && (sortDirection === 'asc' ? '↑' : '↓')}
+            Due Date {sortBy === 'dueDate' && (
+              <span aria-label={sortDirection === 'asc' ? 'ascending' : 'descending'}>
+                {sortDirection === 'asc' ? '↑' : '↓'}
+              </span>
+            )}
           </button>
           <button 
             onClick={() => handleSortChange('priority')}
             className={`sort-btn ${sortBy === 'priority' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'priority'}
+            aria-describedby="sort-label"
           >
-            Priority {sortBy === 'priority' && (sortDirection === 'asc' ? '↑' : '↓')}
+            Priority {sortBy === 'priority' && (
+              <span aria-label={sortDirection === 'asc' ? 'ascending' : 'descending'}>
+                {sortDirection === 'asc' ? '↑' : '↓'}
+              </span>
+            )}
           </button>
           <button 
             onClick={() => handleSortChange('title')}
             className={`sort-btn ${sortBy === 'title' ? 'active' : ''}`}
+            aria-pressed={sortBy === 'title'}
+            aria-describedby="sort-label"
           >
-            Title {sortBy === 'title' && (sortDirection === 'asc' ? '↑' : '↓')}
+            Title {sortBy === 'title' && (
+              <span aria-label={sortDirection === 'asc' ? 'ascending' : 'descending'}>
+                {sortDirection === 'asc' ? '↑' : '↓'}
+              </span>
+            )}
           </button>
         </div>
       </div>
 
-      <div className="task-count">
-        <span>{filteredAndSortedTasks.length} tasks</span>
+      <div className="task-count" role="status" aria-live="polite">
+        <span>{filteredAndSortedTasks.length} task{filteredAndSortedTasks.length !== 1 ? 's' : ''}</span>
       </div>
 
       {filteredAndSortedTasks.length > 0 ? (
-        <div className="tasks-grid">
+        <div className="tasks-grid" role="list" aria-label="Tasks">
           {filteredAndSortedTasks.map(task => (
             <TaskItem 
               key={task.id} 
@@ -178,7 +197,7 @@ const TaskList: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="no-tasks-message">
+        <div className="no-tasks-message" role="status">
           <p>No tasks found matching your filters</p>
         </div>
       )}
