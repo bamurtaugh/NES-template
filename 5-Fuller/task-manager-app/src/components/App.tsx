@@ -33,28 +33,36 @@ const App: React.FC = () => {
           </p>
         </header>
 
-        <main className="app-main">
+        <main className="app-main" role="main">
           <div className="app-controls">
             <button 
               className="btn-primary add-task-btn"
               onClick={handleAddClick}
+              aria-expanded={isAddingTask}
+              aria-controls={isAddingTask ? 'task-form-container' : undefined}
             >
               Add New Task
             </button>
           </div>
 
           {(isAddingTask || editingTask) && (
-            <div className="task-form-container">
-              <h2>{editingTask ? 'Edit Task' : 'Add New Task'}</h2>
+            <section 
+              id="task-form-container" 
+              className="task-form-container"
+              aria-labelledby="task-form-heading"
+            >
+              <h2 id="task-form-heading">{editingTask ? 'Edit Task' : 'Add New Task'}</h2>
               <TaskForm 
                 task={editingTask || undefined}
                 onSubmit={handleTaskFormSubmit}
                 onCancel={handleTaskFormCancel}
               />
-            </div>
+            </section>
           )}
 
-          <TaskList />
+          <section aria-labelledby="task-list-heading">
+            <TaskList />
+          </section>
         </main>
 
         <footer className="app-footer">

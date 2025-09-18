@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wordle Clone</title>
     <style>
         .grid {
@@ -25,17 +27,82 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .correct { background-color: #6aaa64; color: white; }
-        .present { background-color: #c9b458; color: white; }
-        .absent { background-color: #787c7e; color: white; }
+        .correct { 
+            background-color: #6aaa64; 
+            color: white; 
+        }
+        .correct::after {
+            content: ' ✓';
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            font-size: 12px;
+        }
+        .present { 
+            background-color: #c9b458; 
+            color: white; 
+        }
+        .present::after {
+            content: ' ~';
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            font-size: 12px;
+        }
+        .absent { 
+            background-color: #787c7e; 
+            color: white; 
+        }
+        .cell {
+            position: relative;
+        }
+        
+        .game-instructions {
+            margin: 20px auto;
+            max-width: 400px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <h1>Wordle Clone</h1>
-        <div class="grid" id="grid"></div>
-        <div id="message"></div>
-    </div>
+    <main role="main">
+        <div style="text-align: center;">
+            <h1>Wordle Clone</h1>
+            <div class="game-instructions">
+                <p><strong>How to play:</strong></p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>Type letters to fill the current row</li>
+                    <li>Press Enter to submit your guess</li>
+                    <li>Press Backspace to delete letters</li>
+                    <li>Green (✓): Letter is correct and in the right position</li>
+                    <li>Yellow (~): Letter is in the word but wrong position</li>
+                    <li>Gray: Letter is not in the word</li>
+                </ul>
+            </div>
+            
+            <section aria-label="Game Grid">
+                <h2 class="sr-only">Word Guessing Grid</h2>
+                <div class="grid" id="grid" role="grid" aria-label="6 rows of 5 letter guesses"></div>
+            </section>
+            
+            <div id="message" role="status" aria-live="polite" aria-atomic="true"></div>
+            
+            <div id="game-announcements" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+        </div>
+    </main>
     <script src="game.js"></script>
 </body>
 </html>

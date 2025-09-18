@@ -12,9 +12,15 @@ class WordleGame {
         for (let i = 0; i < 6; i++) {
             const row = document.createElement('div');
             row.className = 'row';
+            row.setAttribute('role', 'row');
+            row.setAttribute('aria-label', `Guess ${i + 1}`);
+            
             for (let j = 0; j < 5; j++) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
+                cell.setAttribute('role', 'gridcell');
+                cell.setAttribute('aria-label', `Letter ${j + 1}`);
+                cell.setAttribute('tabindex', '0');
                 row.appendChild(cell);
             }
             grid.appendChild(row);
@@ -39,6 +45,7 @@ class WordleGame {
         if (this.currentCol < 5) {
             const cell = this.getCell(this.currentRow, this.currentCol);
             cell.textContent = letter.toUpperCase();
+            cell.setAttribute('aria-label', `Letter ${this.currentCol + 1}: ${letter.toUpperCase()}`);
             this.currentCol++;
         }
     }
@@ -48,6 +55,7 @@ class WordleGame {
             this.currentCol--;
             const cell = this.getCell(this.currentRow, this.currentCol);
             cell.textContent = '';
+            cell.setAttribute('aria-label', `Letter ${this.currentCol + 1}: empty`);
         }
     }
 
@@ -90,10 +98,33 @@ class WordleGame {
     }
 
     updateColors(result) {
+        const announcements = [];
         for (let i = 0; i < 5; i++) {
             const cell = this.getCell(this.currentRow, i);
-            cell.classList.add(result[i]);
+            const letter = cell.textContent;
+            const status = result[i];
+            cell.classList.add(status);
+            
+            let statusText = '';
+            switch (status) {
+                case 'correct':
+                    statusText = 'correct position';
+                    break;
+                case 'present':
+                    statusText = 'wrong position';
+                    break;
+                case 'absent':
+                    statusText = 'not in word';
+                    break;
+            }
+            
+            cell.setAttribute('aria-label', `Letter ${i + 1}: ${letter}, ${statusText}`);
+            announcements.push(`${letter}: ${statusText}`);
         }
+        
+        // Announce the results to screen readers
+        const announcementDiv = document.getElementById('game-announcements');
+        announcementDiv.textContent = `Row ${this.currentRow + 1} results: ${announcements.join(', ')}`;
     }
 
     getCell(row, col) {

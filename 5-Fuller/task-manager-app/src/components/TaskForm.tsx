@@ -117,7 +117,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
+    <form onSubmit={handleSubmit} className="task-form" role="form" aria-labelledby="task-form-heading">
       <div className="form-group">
         <label htmlFor="title">Task Title*</label>
         <input
@@ -127,8 +127,11 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
           value={formData.title}
           onChange={handleChange}
           className={errors.title ? 'error' : ''}
+          aria-required="true"
+          aria-invalid={errors.title ? 'true' : 'false'}
+          aria-describedby={errors.title ? 'title-error' : undefined}
         />
-        {errors.title && <p className="error-message">{errors.title}</p>}
+        {errors.title && <p id="title-error" className="error-message" role="alert">{errors.title}</p>}
       </div>
 
       <div className="form-group">
@@ -140,8 +143,13 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
           onChange={handleChange}
           className={errors.description ? 'error' : ''}
           rows={4}
+          aria-invalid={errors.description ? 'true' : 'false'}
+          aria-describedby={errors.description ? 'description-error description-help' : 'description-help'}
         />
-        {errors.description && <p className="error-message">{errors.description}</p>}
+        <div id="description-help" className="form-help">
+          Maximum 500 characters
+        </div>
+        {errors.description && <p id="description-error" className="error-message" role="alert">{errors.description}</p>}
       </div>
 
       <div className="form-group">
@@ -197,18 +205,20 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
             type="button" 
             onClick={handleAddTag}
             className="tag-add-btn"
+            aria-label="Add tag to task"
           >
             Add
           </button>
         </div>
-        <div className="tags-container">
+        <div className="tags-container" role="list" aria-label="Current tags">
           {formData.tags.map(tag => (
-            <span key={tag} className="tag">
+            <span key={tag} className="tag" role="listitem">
               {tag}
               <button 
                 type="button" 
                 onClick={() => handleRemoveTag(tag)}
                 className="tag-remove-btn"
+                aria-label={`Remove tag ${tag}`}
               >
                 ×
               </button>
