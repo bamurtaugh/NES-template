@@ -136,12 +136,12 @@ namespace MathUtils
             stats.AddRange(testData);
             
             Console.WriteLine($"Sample count: {stats.Count}");
-            Console.WriteLine($"Mean: {stats.GetMean():F2}");
-            Console.WriteLine($"Standard Deviation: {stats.GetStandardDeviation():F2}");
-            Console.WriteLine($"Min: {stats.GetMin():F2}");
-            Console.WriteLine($"Max: {stats.GetMax():F2}");
-            Console.WriteLine($"Median: {stats.GetMedian():F2}");
-            Console.WriteLine($"Range: {stats.GetRange():F2}");
+            Console.WriteLine($"Mean: {stats.GetMean()?.ToString("F2") ?? "N/A"}");
+            Console.WriteLine($"Standard Deviation: {stats.GetStandardDeviation()?.ToString("F2") ?? "N/A"}");
+            Console.WriteLine($"Min: {stats.GetMin()?.ToString("F2") ?? "N/A"}");
+            Console.WriteLine($"Max: {stats.GetMax()?.ToString("F2") ?? "N/A"}");
+            Console.WriteLine($"Median: {stats.GetMedian()?.ToString("F2") ?? "N/A"}");
+            Console.WriteLine($"Range: {stats.GetRange()?.ToString("F2") ?? "N/A"}");
             
             Console.WriteLine($"\n{stats}");
             
