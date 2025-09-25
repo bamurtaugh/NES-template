@@ -23,6 +23,9 @@ class Calculator {
     }
 
     divide(value) {
+        if (typeof value !== 'number' || isNaN(value)) {
+            throw new Error("Invalid input: value must be a number");
+        }
         if (value === 0) {
             throw new Error("Division by zero is not allowed");
         }

@@ -31,6 +31,9 @@ namespace ChangingIntent
         {
             if (data.Count == 0)
                 throw new InvalidOperationException("No data available");
+            
+            if (!isProcessed)
+                ProcessData();
                 
             return data.Average();
         }
@@ -39,6 +42,9 @@ namespace ChangingIntent
         {
             if (data.Count == 0)
                 throw new InvalidOperationException("No data available");
+            
+            if (!isProcessed)
+                ProcessData();
                 
             return data.Max();
         }
@@ -47,6 +53,9 @@ namespace ChangingIntent
         {
             if (data.Count == 0)
                 throw new InvalidOperationException("No data available");
+            
+            if (!isProcessed)
+                ProcessData();
                 
             return data.Min();
         }
