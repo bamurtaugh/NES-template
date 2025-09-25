@@ -7,7 +7,7 @@ This folder demonstrates scenarios where you need to modify, improve, or fix exi
 ### scenarios.ts
 TypeScript functions showcasing common programming patterns that might need modifications:
 - Optional and default parameters
-- Arrow functions vs regular functions  
+- Arrow functions vs regular functions
 - Algorithm improvements (prime number checking)
 
 **Try this scenario:**
