@@ -48,7 +48,7 @@ Each scenario is designed to trigger specific types of AI suggestions, helping d
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bamurtaugh/NES-template.git
+   git clone <repository-url>
    cd NES-template
    ```
 
