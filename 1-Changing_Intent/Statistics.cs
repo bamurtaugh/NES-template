@@ -118,7 +118,7 @@ namespace MathUtils
             if (samples.Count == 0)
                 return "Statistics: No samples";
 
-            return $"Statistics: {samples.Count} samples, Mean: {GetMean():F2}, StdDev: {GetStandardDeviation():F2}";
+            return $"Statistics: {samples.Count} samples, Mean: {GetMean()?.ToString("F2") ?? "N/A"}, StdDev: {GetStandardDeviation()?.ToString("F2") ?? "N/A"}";
         }
     }
 
