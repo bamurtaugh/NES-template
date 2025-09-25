@@ -7,7 +7,7 @@ This folder contains examples for adding new logic and functionality to existing
 ### `game.py`
 A Python implementation of a two-player number guessing game with the following features:
 - **Interactive gameplay** - Two players take turns guessing a randomly generated number (2-100)
-- **Multiple win conditions** - Players can win by guessing the exact number or half of it
+- **Multiple win conditions** - Players can win by guessing the exact number or a number that when doubled equals the target
 - **Fallback scoring** - If no one wins exactly, the closest guess without going over wins
 - **Replay functionality** - Players can choose to play multiple rounds
 - **Input validation** - Handles invalid inputs gracefully
