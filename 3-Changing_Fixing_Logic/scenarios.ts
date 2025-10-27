@@ -21,6 +21,7 @@ function isPrime(num: number): boolean {
 }
 
 // Example usage
+console.log(isPrime(7)); // Output: true
 console.log(greet("Alice")); // Output: Hello, Alice!
 console.log(greet("Bob", "Hi")); // Output: Hi, Bob!
 console.log(multiply(5)); // Output: 5
