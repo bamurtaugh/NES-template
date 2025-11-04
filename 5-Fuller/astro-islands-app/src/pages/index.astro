@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import UserCard from '../components/UserCard.tsx';
+import ProductCard from '../components/ProductCard.tsx';
+import ShoppingCart from '../components/ShoppingCart.vue';
+import UserSettings from '../components/UserSettings.tsx';
+import type { UserProfile, ProductData, CartItem } from '../types';
+
+// Mock data for demonstration
+const sampleUser: UserProfile = {
+  id: '1',
+  name: 'Jane Doe',
+  email: 'jane@example.com',
+  avatar: '/default-avatar.png',
+  preferences: {
+    theme: 'light',
+    notifications: true,
+    language: 'en'
+  }
+};
+
+const sampleProducts: ProductData[] = [
+  {
+    id: '1',
+    title: 'Wireless Headphones',
+    description: 'High-quality wireless headphones with noise cancellation',
+    price: 199.99,
+    category: 'electronics',
+    inStock: true,
+    tags: ['wireless', 'audio', 'premium']
+  },
+  {
+    id: '2', 
+    title: 'Cotton T-Shirt',
+    description: 'Comfortable 100% cotton t-shirt in various colors',
+    price: 29.99,
+    category: 'clothing',
+    inStock: false,
+    tags: ['cotton', 'casual', 'comfortable']
+  }
+];
+
+const sampleCartItems: CartItem[] = [
+  { productId: '1', quantity: 1 },
+  { productId: '2', quantity: 2 }
+];
+---
+
+<Layout>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">
+      Astro Islands: NES Component Props Demo
+    </h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- User Profile Section -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-semibold">User Profile Island</h2>
+        
+        <!-- React Component Island -->
+        <UserCard 
+          client:load
+          user={sampleUser}
+          showActions={true}
+        />
+        
+        <!-- React Settings Component Island -->
+        <UserSettings 
+          client:idle
+          user={sampleUser}
+        />
+      </div>
+      
+      <!-- Shopping Section -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-semibold">Shopping Islands</h2>
+        
+        <!-- React Product Components -->
+        {sampleProducts.map(product => (
+          <ProductCard 
+            key={product.id}
+            client:visible
+            product={product}
+            showPrice={true}
+          />
+        ))}
+        
+        <!-- Vue Shopping Cart Component Island -->
+        <ShoppingCart 
+          client:idle
+          items={sampleCartItems}
+        />
+      </div>
+      
+    </div>
+    
+    <div class="mt-12 p-6 bg-blue-50 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4">About This Demo</h3>
+      <p class="text-gray-700">
+        This Astro application demonstrates islands architecture with React and Vue components.
+        Each component is hydrated independently based on different strategies (load, idle, visible).
+        Try the scenarios in the README to see how NES can suggest prop updates across these islands.
+      </p>
+    </div>
+  </div>
+</Layout>
