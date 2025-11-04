@@ -1,0 +1,29 @@
+{
+  "$schema": "./task-config.schema.json",
+  "version": "1.2.0",
+  "environment": "production",
+  "database": {
+    "type": "postgresql",
+    "host": "db.example.com",
+    "port": 5432,
+    "name": "taskmanager_prod",
+    "credentials": {
+      "username": "task_user",
+      "password": "${DB_PASSWORD}"
+    }
+  },
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "timeout": 10000,
+    "retries": 3,
+    "rateLimit": {
+      "requests": 1000,
+      "windowMs": 60000
+    }
+  },
+  "features": {
+    "enableNotifications": true,
+    "enableAnalytics": true,
+    "maxTasksPerUser": 500
+  }
+}
