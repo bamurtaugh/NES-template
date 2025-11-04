@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Task, TaskFormData } from '../types/task';
+import { generateSampleTasks } from '../utils/sampleData';
 
 interface TaskContextType {
   tasks: Task[];
@@ -11,6 +12,8 @@ interface TaskContextType {
   getTasksByStatus: (status: Task['status']) => Task[];
   getTasksByPriority: (priority: Task['priority']) => Task[];
   getTasksByTag: (tag: string) => Task[];
+  loadSampleData: () => void;
+  clearAllTasks: () => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -40,6 +43,10 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } catch (error) {
         console.error('Error parsing stored tasks:', error);
       }
+    } else {
+      // If no stored tasks, load sample data for demo purposes
+      const sampleTasks = generateSampleTasks();
+      setTasks(sampleTasks);
     }
   }, []);
 
@@ -109,6 +116,15 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return tasks.filter(task => task.tags.includes(tag));
   };
 
+  const loadSampleData = (): void => {
+    const sampleTasks = generateSampleTasks();
+    setTasks(sampleTasks);
+  };
+
+  const clearAllTasks = (): void => {
+    setTasks([]);
+  };
+
   const value = {
     tasks,
     addTask,
@@ -117,7 +133,9 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     getTaskById,
     getTasksByStatus,
     getTasksByPriority,
-    getTasksByTag
+    getTasksByTag,
+    loadSampleData,
+    clearAllTasks
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;

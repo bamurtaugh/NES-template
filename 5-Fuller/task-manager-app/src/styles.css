@@ -468,3 +468,222 @@ textarea {
 .add-task-btn {
   margin-left: auto;
 }
+
+/* Task Statistics */
+.task-statistics {
+  background-color: var(--color-white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 30px;
+}
+
+.task-statistics h2 {
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background-color: var(--color-light);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--color-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-breakdown h3,
+.top-tags h3 {
+  margin-bottom: 15px;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.priority-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.priority-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priority-label {
+  min-width: 120px;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+}
+
+.priority-bar-container {
+  flex: 1;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.priority-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.priority-bar-fill.high {
+  background-color: var(--priority-high);
+}
+
+.priority-bar-fill.medium {
+  background-color: var(--priority-medium);
+}
+
+.priority-bar-fill.low {
+  background-color: var(--priority-low);
+}
+
+.priority-count {
+  min-width: 30px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-dark);
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tag-count {
+  color: var(--color-grey);
+  font-size: 0.9rem;
+}
+
+/* Keyboard Shortcuts Help */
+.keyboard-shortcuts-help {
+  background-color: var(--color-white);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 20px;
+}
+
+.keyboard-shortcuts-help h3 {
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.shortcut-item kbd {
+  background-color: var(--color-light);
+  border: 1px solid var(--color-grey);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.shortcut-item span {
+  color: var(--color-dark);
+}
+
+/* Animations and Transitions */
+.task-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Improved focus states */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Better button hover effects */
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-1px);
+}
