@@ -1,0 +1,38 @@
+{
+  "name": "webassembly-nes-demo",
+  "version": "1.0.0",
+  "description": "WebAssembly example demonstrating Next Edit Suggestions (NES) for WASM development",
+  "main": "js/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "make build",
+    "dev": "make serve",
+    "clean": "make clean",
+    "debug": "make debug"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "image-processing",
+    "copilot",
+    "next-edit-suggestions",
+    "c",
+    "javascript",
+    "emscripten"
+  ],
+  "author": "NES Template Example",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bamurtaugh/NES-template"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "browserslist": [
+    "defaults",
+    "supports wasm"
+  ]
+}
