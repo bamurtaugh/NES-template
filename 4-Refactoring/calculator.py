@@ -38,11 +38,15 @@ class Calculator:
             return None
     
     def calculate_statistics(self, numbers):
-        """Calculate statistics - long method that could be broken down"""
+        """Calculate statistics - long method that could be broken down
+        
+        NOTE: This method intentionally uses manual implementations instead of
+        built-in functions (sum, min, max) to demonstrate refactoring opportunities.
+        """
         if not numbers:
             return None
         
-        # Calculate sum
+        # Calculate sum (could use sum() built-in)
         total = 0
         for num in numbers:
             total += num
@@ -50,13 +54,13 @@ class Calculator:
         # Calculate average
         avg = total / len(numbers)
         
-        # Find minimum
+        # Find minimum (could use min() built-in)
         min_val = numbers[0]
         for num in numbers:
             if num < min_val:
                 min_val = num
         
-        # Find maximum
+        # Find maximum (could use max() built-in)
         max_val = numbers[0]
         for num in numbers:
             if num > max_val:
