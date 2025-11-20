@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - USER_SERVICE_URL=http://user-service:5000
+      - ORDER_SERVICE_URL=http://order-service:3001
+    depends_on:
+      - user-service
+      - order-service
+    networks:
+      - microservices-network
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+    networks:
+      - microservices-network
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - USER_SERVICE_URL=http://user-service:5000
+      - NOTIFICATION_SERVICE_URL=http://notification-service:3002
+    depends_on:
+      - user-service
+      - notification-service
+    networks:
+      - microservices-network
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
