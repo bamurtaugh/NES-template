@@ -25,6 +25,8 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
+      # Set FLASK_DEBUG=true only in development for debugging. Never in production!
+      # - FLASK_DEBUG=true
     networks:
       - microservices-network
 
