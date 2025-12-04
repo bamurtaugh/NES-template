@@ -87,7 +87,7 @@ To work with all samples in this repository, you'll need:
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/bamurtaugh/NES-template.git
    cd NES-template
    ```
 
