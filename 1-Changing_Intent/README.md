@@ -39,3 +39,22 @@ const circle = new Circle(0, 0, 5);
 const area = circle.getArea(); // Returns ~78.54
 const circumference = circle.getCircumference(); // Returns ~31.42
 ```
+
+### Rectangle
+Represents a rectangle in 2D space with a top-left corner point (x, y), width, and height.
+
+**Constructor:**
+```typescript
+new Rectangle(x: number, y: number, width: number, height: number)
+```
+
+**Methods:**
+- `getArea()`: Calculates the area of the rectangle (width × height)
+- `getPerimeter()`: Calculates the perimeter of the rectangle (2 × (width + height))
+
+**Example:**
+```typescript
+const rectangle = new Rectangle(0, 0, 10, 5);
+const area = rectangle.getArea(); // Returns 50
+const perimeter = rectangle.getPerimeter(); // Returns 30
+```
