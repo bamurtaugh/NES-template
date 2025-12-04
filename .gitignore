@@ -1,0 +1,49 @@
+# Compiled JavaScript files from TypeScript
+*.js
+*.js.map
+
+# Ignore compiled files in specific directories
+!3-Changing_Fixing_Logic/js-game/**/*.js
+!3-Changing_Fixing_Logic/js-game/public/**/*.js
+
+# Node modules
+node_modules/
+
+# Build outputs
+out/
+dist/
+build/
+
+# IDE and editor files
+.vscode-test/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Package files
+*.vsix
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Java build
+target/
+*.class
+*.jar
+*.war
+
+# C++ compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.so
+*.dylib
