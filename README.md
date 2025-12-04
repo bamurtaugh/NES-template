@@ -87,7 +87,7 @@ To work with all samples in this repository, you'll need:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/bamurtaugh/NES-template.git
+   git clone <repository-url>
    cd NES-template
    ```
 
@@ -142,20 +142,21 @@ npx ts-node geometry.ts
 **Try**: Rename the `getDistance()` method to `getDistanceFromOrigin()` and observe NES suggestions.
 
 #### C++ - `stats.cpp`
-```bash
-cd 1-Changing_Intent
 
-# Note: stats.h header file is not included in this sample
-# To test compilation (header would need to be created):
-# g++ -std=c++17 -c stats.cpp -o stats.o
+This sample demonstrates a Statistics class with methods for calculating mean, standard deviation, and minimum values. Since this is a demonstration sample focused on NES capabilities, no runnable test is provided.
 
-# Manual testing approach:
-# 1. Review the code logic
-# 2. Try adding a new method (e.g., getMax())
-# 3. Observe NES suggestions for related changes
-```
+**How to use this sample**:
+1. Open `stats.cpp` in VS Code with GitHub Copilot enabled
+2. Review the existing method implementations (`getMean()`, `getStandardDeviation()`, `getMin()`)
+3. Try adding a new method following the existing pattern, such as:
+   ```cpp
+   std::optional<double> Statistics::getMax() const
+   {
+   ```
+4. Observe how NES suggests the complete implementation based on the patterns in existing methods
+5. Try modifying the return type or parameter patterns and see how NES suggests updates throughout the class
 
-**Try**: Add a new `getMax()` method and see if NES suggests similar patterns to existing methods.
+**Try**: Add a new `getMax()` method and observe NES suggesting similar patterns to existing methods (empty check, iteration, return logic).
 
 ### 2. Adding Logic (`2-Adding_Logic/`)
 
