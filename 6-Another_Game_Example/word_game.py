@@ -60,41 +60,36 @@ def play_game(player1_name, player2_name):
         print(f"Wrong guesses: {', '.join(sorted(wrong_guesses)) if wrong_guesses else 'None'}")
         print(f"Attempts remaining: {max_attempts - current_attempt}")
         
-        try:
-            print(f"\n{current_player_name}'s turn!")
-            guess = input(f"{current_player_name}, guess a letter: ").lower().strip()
-            
-            if len(guess) != 1 or not guess.isalpha():
-                print(f"Come on {current_player_name}, please enter a single letter!")
-                continue
-            
-            if guess in guessed_letters or guess in wrong_guesses:
-                print(f"That letter has already been guessed! Try again, {current_player_name}.")
-                continue
-            
-            current_attempt += 1
-            
-            if guess in target_word:
-                guessed_letters.add(guess)
-                count = target_word.count(guess)
-                print(f"Great job, {current_player_name}! The letter '{guess}' appears {count} time(s)!")
-                player_scores[current_player_name] += count
-                
-                if check_win(guessed_letters, target_word):
-                    print(f"\n🎉 Congratulations! The word was: {target_word.upper()}")
-                    print(f"\n{current_player_name} guessed the final letter and wins the game!")
-                    print("\nFinal Scores:")
-                    for player, score in player_scores.items():
-                        print(f"{player}: {score} correct letter(s)")
-                    return True
-            else:
-                wrong_guesses.add(guess)
-                print(f"Sorry {current_player_name}, the letter '{guess}' is not in the word.")
-                print(f"{other_player_name}, get ready for your turn!")
+        print(f"\n{current_player_name}'s turn!")
+        guess = input(f"{current_player_name}, guess a letter: ").lower().strip()
         
-        except KeyboardInterrupt:
-            print("\n\nGame interrupted. Goodbye!")
-            return False
+        if len(guess) != 1 or not guess.isalpha():
+            print(f"Come on {current_player_name}, please enter a single letter!")
+            continue
+        
+        if guess in guessed_letters or guess in wrong_guesses:
+            print(f"That letter has already been guessed! Try again, {current_player_name}.")
+            continue
+        
+        current_attempt += 1
+        
+        if guess in target_word:
+            guessed_letters.add(guess)
+            count = target_word.count(guess)
+            print(f"Great job, {current_player_name}! The letter '{guess}' appears {count} time(s)!")
+            player_scores[current_player_name] += count
+            
+            if check_win(guessed_letters, target_word):
+                print(f"\n🎉 Congratulations! The word was: {target_word.upper()}")
+                print(f"\n{current_player_name} guessed the final letter and wins the game!")
+                print("\nFinal Scores:")
+                for player, score in player_scores.items():
+                    print(f"{player}: {score} correct letter(s)")
+                return True
+        else:
+            wrong_guesses.add(guess)
+            print(f"Sorry {current_player_name}, the letter '{guess}' is not in the word.")
+            print(f"{other_player_name}, get ready for your turn!")
     
     # Game over - ran out of attempts
     print(f"\n❌ Game Over! You've used all {max_attempts} attempts.")
