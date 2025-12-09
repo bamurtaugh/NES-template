@@ -48,7 +48,7 @@ Depending on which example you want to explore, you may need:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/bamurtaugh/NES-template.git
+   git clone https://github.com/<your-username>/NES-template.git
    cd NES-template
    ```
 
