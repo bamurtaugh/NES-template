@@ -87,7 +87,7 @@ Depending on which examples you want to explore, you may need:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/bamurtaugh/NES-template.git
+   git clone <repository-url>
    cd NES-template
    ```
 
@@ -146,7 +146,7 @@ Depending on which examples you want to explore, you may need:
 Try this scenario to see NES in action:
 
 1. Open `5-Fuller/task-manager-app/src/types/task.ts`
-2. At line 13, add: `isArchived: boolean;`
+2. In the Task interface (after line 12, before the closing brace), add: `isArchived: boolean;`
 3. Watch NES suggest adding the same field to `TaskFormData` type
 4. Accept the suggestion and see how NES maintains type consistency
 
