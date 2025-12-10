@@ -27,10 +27,6 @@ class Statistics
   def get_min
     return nil if @samples.empty?
 
-    min = @samples[0]
-    @samples.each do |sample|
-      min = sample if sample < min
-    end
-    min
+    @samples.min
   end
 end
