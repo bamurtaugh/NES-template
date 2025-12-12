@@ -25,7 +25,7 @@ Contains TypeScript and C++ code samples for demonstrating intent changes.
 
 ### Java Project (`4-Refactoring/java-sample`)
 
-This project uses **Maven** with **JUnit 4** for testing.
+This project uses **Maven** with **JUnit 4.13.2** for testing.
 
 **Prerequisites:**
 - Java 11 or higher
