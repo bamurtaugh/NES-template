@@ -1,8 +1,8 @@
-# Task Manager App: Copilot Next Edit Suggestions Demo
+# ✅ Task Manager App: Copilot Next Edit Suggestions Demo
 
-This project serves as an advanced and relatable example of how Copilot Next Edit Suggestions (NES) can help with real-world development tasks. The application is a feature-rich task manager built with React and TypeScript.
+This project serves as an advanced and relatable example of how Copilot Next Edit Suggestions (NES) can help with real-world development tasks. The application is a feature-rich task manager built with React and TypeScript. 🚀⚛️
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 task-manager-app/
@@ -26,9 +26,9 @@ task-manager-app/
 └── tsconfig.json
 ```
 
-## How to Use This Example
+## 💡 How to Use This Example
 
-### Scenario 1: [`TaskForm.tsx`](/5-Fuller/task-manager-app/src/components/TaskForm.tsx)
+### Scenario 1: [`TaskForm.tsx`](/5-Fuller/task-manager-app/src/components/TaskForm.tsx) 📝
 
 1. Line 88: Add a new `showConfirmation` parameter to the `handleRemoveTag` function:
 
@@ -48,13 +48,13 @@ task-manager-app/
 
    NES should identify that the existing condition also checks description and suggest combining the two conditions into a more elegant solution.
 
-### Scenario 2: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts)
+### Scenario 2: [`useTaskFilters.ts`](/5-Fuller/task-manager-app/src/hooks/useTaskFilters.ts) 🔍
 
 1. Line 134: Update the `if` to a `switch`.
    
    NES should suggest how to use use `switch` syntax for the comparisons.
 
-### Scenario 3: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts)
+### Scenario 3: [`task.ts`](/5-Fuller/task-manager-app/src/types/task.ts) 🏷️
 
 1. Line 13: Add a new field in the Task interface like `isArchived: boolean;`
    
@@ -76,7 +76,7 @@ task-manager-app/
 
    NES should suggest updating the priority field to use this enum.
 
-### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx)
+### Scenario 4: [`TaskItem.tsx`](/5-Fuller/task-manager-app/src/components/TaskItem.tsx) 📋
 
 1. Line 25: Add an `enum taskPriority` 
 
