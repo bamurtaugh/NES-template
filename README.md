@@ -49,7 +49,7 @@ See the [Task Manager App README](5-Fuller/task-manager-app/README.md) for detai
 ```
 NES-template/
 ├── 1-Changing_Intent/       # Intent modification examples
-├── 2-Adding_Logic/          # Logic addition examples  
+├── 2-Adding_Logic/          # Logic addition examples
 ├── 3-Changing_Fixing_Logic/ # Bug fixing and logic changes
 ├── 4-Refactoring/           # Code refactoring examples
 └── 5-Fuller/                # Complete application examples
