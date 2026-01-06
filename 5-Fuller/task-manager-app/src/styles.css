@@ -21,6 +21,34 @@
   
   --border-radius: 4px;
   --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --text-primary: #34495e;
+  --text-secondary: #95a5a6;
+  --border-color: #ddd;
+  --hover-bg: #f0f0f0;
+}
+
+[data-theme='dark'] {
+  --color-primary: #5dade2;
+  --color-secondary: #3498db;
+  --color-accent: #1abc9c;
+  --color-danger: #e74c3c;
+  --color-warning: #f39c12;
+  --color-success: #2ecc71;
+  --color-light: #1e1e1e;
+  --color-dark: #e0e0e0;
+  --color-grey: #b0b0b0;
+  --color-white: #2d2d2d;
+  
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border-color: #444;
+  --hover-bg: #3a3a3a;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -35,9 +63,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-light);
-  color: var(--color-dark);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
@@ -56,7 +85,8 @@ code {
   text-align: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--color-grey);
+  border-bottom: 1px solid var(--text-secondary);
+  position: relative;
 }
 
 .app-header h1 {
@@ -65,8 +95,9 @@ code {
 }
 
 .app-description {
-  color: var(--color-grey);
+  color: var(--text-secondary);
   font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
 .app-main {
@@ -83,14 +114,14 @@ code {
   text-align: center;
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid var(--color-grey);
-  color: var(--color-grey);
+  border-top: 1px solid var(--text-secondary);
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 /* Task form */
 .task-form-container {
-  background-color: var(--color-white);
+  background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
@@ -120,9 +151,11 @@ code {
 
 input, textarea, select {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 input:focus, textarea:focus, select:focus {
@@ -154,7 +187,7 @@ textarea {
 .tag-add-btn {
   padding: 10px 15px;
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -171,7 +204,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   padding: 5px 10px;
   border-radius: 50px;
   font-size: 0.9rem;
@@ -180,7 +213,7 @@ textarea {
 .tag-remove-btn {
   background: none;
   border: none;
-  color: white;
+  color: var(--color-white);
   margin-left: 5px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -201,7 +234,7 @@ textarea {
 }
 
 .task-filters {
-  background-color: var(--color-white);
+  background-color: var(--bg-secondary);
   padding: 15px;
   border-radius: var(--border-radius);
   margin-bottom: 20px;
@@ -253,12 +286,12 @@ textarea {
 }
 
 .sort-btn:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-bg);
 }
 
 .sort-btn.active {
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
 }
 
 .task-count {
@@ -287,14 +320,14 @@ textarea {
 .no-tasks-message {
   text-align: center;
   padding: 40px;
-  background-color: var(--color-white);
+  background-color: var(--bg-secondary);
   border-radius: var(--border-radius);
-  color: var(--color-grey);
+  color: var(--text-secondary);
 }
 
 /* Task Item */
 .task-item {
-  background-color: var(--color-white);
+  background-color: var(--bg-secondary);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   padding: 15px;
@@ -360,7 +393,7 @@ textarea {
 }
 
 .btn-icon:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-bg);
 }
 
 .btn-icon.delete:hover {
@@ -439,7 +472,7 @@ textarea {
 /* Buttons */
 .btn-primary {
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius);
@@ -453,7 +486,7 @@ textarea {
 
 .btn-secondary {
   background-color: var(--color-grey);
-  color: white;
+  color: var(--color-white);
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius);
@@ -467,4 +500,29 @@ textarea {
 
 .add-task-btn {
   margin-left: auto;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--color-secondary);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.theme-toggle-icon {
+  font-size: 1.2rem;
 }
