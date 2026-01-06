@@ -187,7 +187,7 @@ textarea {
 .tag-add-btn {
   padding: 10px 15px;
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -204,7 +204,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   padding: 5px 10px;
   border-radius: 50px;
   font-size: 0.9rem;
@@ -213,7 +213,7 @@ textarea {
 .tag-remove-btn {
   background: none;
   border: none;
-  color: white;
+  color: var(--color-white);
   margin-left: 5px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -291,7 +291,7 @@ textarea {
 
 .sort-btn.active {
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
 }
 
 .task-count {
@@ -472,7 +472,7 @@ textarea {
 /* Buttons */
 .btn-primary {
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius);
@@ -486,7 +486,7 @@ textarea {
 
 .btn-secondary {
   background-color: var(--color-grey);
-  color: white;
+  color: var(--color-white);
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius);
@@ -520,7 +520,7 @@ textarea {
 
 .theme-toggle:hover {
   background-color: var(--color-secondary);
-  color: white;
+  color: var(--color-white);
 }
 
 .theme-toggle-icon {
