@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TaskProvider } from '../context/TaskContext';
+import { useTheme } from '../context/ThemeContext';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import { Task } from '../types/task';
@@ -7,6 +8,7 @@ import { Task } from '../types/task';
 const App: React.FC = () => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   const handleAddClick = () => {
     setIsAddingTask(true);
@@ -31,6 +33,16 @@ const App: React.FC = () => {
           <p className="app-description">
             An advanced example showing how Copilot Next Edit Suggestions can help
           </p>
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            <span className="theme-toggle-icon">
+              {theme === 'light' ? '🌙' : '☀️'}
+            </span>
+            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+          </button>
         </header>
 
         <main className="app-main">
