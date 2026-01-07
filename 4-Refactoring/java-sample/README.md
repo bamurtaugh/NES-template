@@ -68,11 +68,11 @@ Follow these steps to open this sample in a container using the VS Code Dev Cont
 
 This sample is designed to help you practice refactoring with Copilot Next Edit Suggestions. Here are specific scenarios to try:
 
-### Scenario 1: Extract Method Refactoring in [`App.java`](/4-Refactoring/java-sample/src/main/java/com/mycompany/app/App.java)
+### Scenario 1: Extract Method Refactoring in [`App.java`](src/main/java/com/mycompany/app/App.java)
 
-**Lines 16-21: Extract the greeting logic into a separate method**
+**Lines 17-21: Extract the greeting logic into a separate method**
 
-1. Select lines 16-21 (the code that prompts for name and displays greeting):
+1. Select lines 17-21 (the code that prompts for name and displays greeting):
    ```java
    // Ask for the user's first name
    System.out.print("Enter your name: ");
@@ -89,7 +89,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
    
    NES should suggest moving the greeting logic into this method and updating the `main` method to call it.
 
-**Lines 23-27: Extract language preference into a separate method**
+**Lines 24-27: Extract language preference into a separate method**
 
 1. After extracting the greeting method, create another method for the language preference:
    ```java
@@ -100,14 +100,14 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 2: Extract Calculator Logic
 
-**Lines 29-66: Refactor calculator into a separate method**
+**Lines 30-68: Refactor calculator into a separate method**
 
 1. Add a new method signature for the calculator:
    ```java
    private static void runCalculator(Scanner scanner) {
    ```
    
-   NES should suggest moving all the calculator logic (lines 29-66) into this method.
+   NES should suggest moving all the calculator logic (lines 30-68) into this method.
 
 2. Further refactoring: Extract the operation switch statement into its own method:
    ```java
@@ -118,7 +118,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 3: Improve Error Handling
 
-**Line 52-58: Enhance division by zero error handling**
+**Lines 52-58: Enhance division by zero error handling**
 
 1. Create a custom exception class at the top of the file:
    ```java
@@ -133,7 +133,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 4: Add Input Validation
 
-**Lines 32-35: Add validation for numeric input**
+**Lines 31-35: Add validation for numeric input**
 
 1. Add a validation method:
    ```java
@@ -142,16 +142,16 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
    
    NES should suggest implementing a validation loop that handles `InputMismatchException` and re-prompts the user for valid input.
 
-2. After creating the method, update line 32 to use it:
+2. After creating the method, update line 31 to use it:
    ```java
    double num1 = getValidNumber(scanner, "Enter the first number: ");
    ```
    
-   NES should suggest updating line 34 to use the same method for the second number.
+   NES should suggest updating line 35 to use the same method for the second number.
 
 ### Scenario 5: Improve Code Organization with Enums
 
-**Line 37-64: Replace char operation with an enum**
+**Lines 41-64: Replace char operation with an enum**
 
 1. Create an Operation enum above the main method:
    ```java
