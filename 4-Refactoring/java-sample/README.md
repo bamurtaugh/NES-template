@@ -133,7 +133,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 4: Add Input Validation
 
-**Lines 31-35: Add validation for numeric input**
+**Lines 32 and 35: Add validation for numeric input**
 
 1. Add a validation method:
    ```java
@@ -142,7 +142,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
    
    NES should suggest implementing a validation loop that handles `InputMismatchException` and re-prompts the user for valid input.
 
-2. After creating the method, update line 31 to use it:
+2. After creating the method, update line 32 to use it:
    ```java
    double num1 = getValidNumber(scanner, "Enter the first number: ");
    ```
@@ -151,7 +151,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 5: Improve Code Organization with Enums
 
-**Lines 41-64: Replace char operation with an enum**
+**Lines 38-64: Replace char operation with an enum**
 
 1. Create an Operation enum above the main method:
    ```java
