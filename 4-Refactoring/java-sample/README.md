@@ -118,7 +118,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 3: Improve Error Handling
 
-**Lines 52-58: Enhance division by zero error handling**
+**Lines 52-57: Enhance division by zero error handling**
 
 1. Create a custom exception class at the top of the file:
    ```java
@@ -151,7 +151,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 5: Improve Code Organization with Enums
 
-**Lines 38-64: Replace char operation with an enum**
+**Lines 38-66: Replace char operation with an enum**
 
 1. Create an Operation enum above the main method:
    ```java
