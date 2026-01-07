@@ -70,9 +70,9 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 1: Extract Method Refactoring in [`App.java`](src/main/java/com/mycompany/app/App.java)
 
-**Lines 17-21: Extract the greeting logic into a separate method**
+**Lines 16-21: Extract the greeting logic into a separate method**
 
-1. Select lines 17-21 (the code that prompts for name and displays greeting):
+1. Select lines 16-21 (the comment and code that prompts for name and displays greeting):
    ```java
    // Ask for the user's first name
    System.out.print("Enter your name: ");
@@ -89,7 +89,7 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
    
    NES should suggest moving the greeting logic into this method and updating the `main` method to call it.
 
-**Lines 24-27: Extract language preference into a separate method**
+**Lines 23-27: Extract language preference into a separate method**
 
 1. After extracting the greeting method, create another method for the language preference:
    ```java
@@ -100,14 +100,14 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 2: Extract Calculator Logic
 
-**Lines 30-66: Refactor calculator into a separate method**
+**Lines 29-66: Refactor calculator into a separate method**
 
 1. Add a new method signature for the calculator:
    ```java
    private static void runCalculator(Scanner scanner) {
    ```
    
-   NES should suggest moving all the calculator logic (lines 30-66) into this method.
+   NES should suggest moving all the calculator logic (lines 29-66) into this method.
 
 2. Further refactoring: Extract the operation switch statement into its own method:
    ```java
