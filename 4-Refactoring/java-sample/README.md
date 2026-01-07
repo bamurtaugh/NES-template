@@ -100,14 +100,14 @@ This sample is designed to help you practice refactoring with Copilot Next Edit 
 
 ### Scenario 2: Extract Calculator Logic
 
-**Lines 30-68: Refactor calculator into a separate method**
+**Lines 30-66: Refactor calculator into a separate method**
 
 1. Add a new method signature for the calculator:
    ```java
    private static void runCalculator(Scanner scanner) {
    ```
    
-   NES should suggest moving all the calculator logic (lines 30-68) into this method.
+   NES should suggest moving all the calculator logic (lines 30-66) into this method.
 
 2. Further refactoring: Extract the operation switch statement into its own method:
    ```java
