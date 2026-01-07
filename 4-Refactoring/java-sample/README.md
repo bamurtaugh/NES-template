@@ -1,12 +1,38 @@
-# Try Out Development Containers: Java
+# Java Refactoring Sample: Copilot Next Edit Suggestions Demo
 
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-java)
+
+This project demonstrates how **Copilot Next Edit Suggestions (NES)** can assist with common refactoring tasks in Java applications. The sample is a simple interactive command-line application that includes a greeting system and a basic calculator, providing multiple opportunities to practice refactoring with NES.
 
 A **development container** is a running container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
 
 This is a sample project that lets you try out either option in a few easy steps. We have a variety of other [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) sample projects, too.
 
 > **Note:** If you already have a Codespace or dev container, you can jump to the [Things to try](#things-to-try) section.
+
+## Project Structure
+
+```
+java-sample/
+├── .devcontainer/
+│   └── devcontainer.json      # Dev container configuration
+├── src/
+│   ├── main/java/com/mycompany/app/
+│   │   └── App.java           # Main application with greeting and calculator
+│   └── test/java/com/mycompany/app/
+│       └── AppTest.java       # Unit tests
+├── pom.xml                    # Maven project configuration
+└── README.md
+```
+
+## What This Application Does
+
+The `App.java` file contains a simple command-line application that:
+1. **Greets the user**: Prompts for and displays a personalized greeting
+2. **Asks about programming preferences**: Collects the user's favorite programming language
+3. **Performs basic arithmetic**: Implements a calculator that supports addition, subtraction, multiplication, and division with error handling for division by zero
+
+This structure provides excellent opportunities for refactoring exercises such as extracting methods, improving error handling, adding validation, and restructuring code organization.
 
 ## Setting up the development container
 
@@ -38,11 +64,119 @@ Follow these steps to open this sample in a container using the VS Code Dev Cont
    - Press <kbd>F1</kbd> and select the **Dev Containers: Open Folder in Container...** command.
    - Select the cloned copy of this folder, wait for the container to start, and try things out!
 
+## How to Use This Example with NES
+
+This sample is designed to help you practice refactoring with Copilot Next Edit Suggestions. Here are specific scenarios to try:
+
+### Scenario 1: Extract Method Refactoring in [`App.java`](src/main/java/com/mycompany/app/App.java)
+
+**Lines 16-21: Extract the greeting logic into a separate method**
+
+1. Select lines 16-21 (the comment and code that prompts for name and displays greeting):
+   ```java
+   // Ask for the user's first name
+   System.out.print("Enter your name: ");
+   String name = scanner.nextLine();
+
+   // Greet the user
+   System.out.println("Hello, " + name + "! Welcome to the Remote World!");
+   ```
+
+2. Start extracting by adding a new method signature above the `main` method:
+   ```java
+   private static void greetUser(Scanner scanner) {
+   ```
+   
+   NES should suggest moving the greeting logic into this method and updating the `main` method to call it.
+
+**Lines 23-27: Extract language preference into a separate method**
+
+1. After extracting the greeting method, create another method for the language preference:
+   ```java
+   private static void askFavoriteLanguage(Scanner scanner) {
+   ```
+   
+   NES should suggest extracting the language preference logic and calling it from `main`.
+
+### Scenario 2: Extract Calculator Logic
+
+**Lines 29-66: Refactor calculator into a separate method**
+
+1. Add a new method signature for the calculator:
+   ```java
+   private static void runCalculator(Scanner scanner) {
+   ```
+   
+   NES should suggest moving all the calculator logic (lines 29-66) into this method.
+
+2. Further refactoring: Extract the operation switch statement into its own method:
+   ```java
+   private static double performOperation(double num1, double num2, char operation) {
+   ```
+   
+   NES should suggest restructuring the switch statement to return the result and throw an exception for invalid operations.
+
+### Scenario 3: Improve Error Handling
+
+**Lines 52-57: Enhance division by zero error handling**
+
+1. Create a custom exception class at the top of the file:
+   ```java
+   static class CalculatorException extends Exception {
+       public CalculatorException(String message) {
+           super(message);
+       }
+   }
+   ```
+   
+   NES should suggest updating the division by zero check to throw this exception and adding try-catch blocks in the appropriate places.
+
+### Scenario 4: Add Input Validation
+
+**Lines 32 and 35: Add validation for numeric input**
+
+1. Add a validation method:
+   ```java
+   private static double getValidNumber(Scanner scanner, String prompt) {
+   ```
+   
+   NES should suggest implementing a validation loop that handles `InputMismatchException` and re-prompts the user for valid input.
+
+2. After creating the method, update line 32 to use it:
+   ```java
+   double num1 = getValidNumber(scanner, "Enter the first number: ");
+   ```
+   
+   NES should suggest updating line 35 to use the same method for the second number.
+
+### Scenario 5: Improve Code Organization with Enums
+
+**Lines 38-66: Replace char operation with an enum**
+
+1. Create an Operation enum above the main method:
+   ```java
+   enum Operation {
+       ADD('+'), SUBTRACT('-'), MULTIPLY('*'), DIVIDE('/');
+       
+       private final char symbol;
+       
+       Operation(char symbol) {
+           this.symbol = symbol;
+       }
+       
+       public char getSymbol() {
+           return symbol;
+       }
+   }
+   ```
+   
+   NES should suggest updating the switch statement to use the enum and adding a method to parse the character input into an Operation.
+
 ## Things to try
 
 Once you have this sample opened, you'll be able to work with it like you would locally.
 
-Some things to try:
+### Basic Development Container Features:
 
 1. **Edit:**
    - Open `src/main/java/com/mycompany/app/App.java`.
@@ -57,13 +191,19 @@ Some things to try:
    - Add a breakpoint.
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
+   - **Try the application**: Test the calculator with different inputs and operations to see how it works.
 
-4. **Run a Test:**
+4. **Run Tests:**
    - Open `src/test/java/com/mycompany/app/AppTest.java`.
    - Put a breakpoint in a test.
    - Click the `Debug Test` in the Code Lens above the function and watch it hit the breakpoint.
+   - **Run tests from terminal**: Execute `mvn test` to run all tests.
 
-5. **Install Node.js using a Dev Container Feature:**
+5. **Build the Project:**
+   - Run `mvn clean package` in the terminal to build the JAR file.
+   - Run the application with `java -jar target/my-app-1.0-SNAPSHOT.jar`.
+
+6. **Install Node.js using a Dev Container Feature:**
    - Press <kbd>F1</kbd> and select the **Dev Containers: Configure Container Features...** or **Codespaces: Configure Container Features...** command.
    - Type "node" in the text box at the top.
    - Check the check box next to "Node.js (via nvm) and yarn" (published by devcontainers) 
