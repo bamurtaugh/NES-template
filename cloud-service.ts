@@ -10,7 +10,7 @@ class MockCloudStorage implements CloudStorageService {
     private storage: Map<string, string> = new Map();
 
     async upload(fileName: string, data: string): Promise<string> {
-        const fileId = `${Date.now()}-${fileName}`;
+        const fileId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}-${fileName}`;
         this.storage.set(fileId, data);
         return fileId;
     }
@@ -24,6 +24,9 @@ class MockCloudStorage implements CloudStorageService {
     }
 
     async delete(fileId: string): Promise<boolean> {
+        if (!this.storage.has(fileId)) {
+            throw new Error(`File not found: ${fileId}`);
+        }
         return this.storage.delete(fileId);
     }
 
